@@ -1,4 +1,4 @@
-<x-guest-layout>
+<div>
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
@@ -14,6 +14,14 @@
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        </div>
+
+        <div>
+            <select name="role" id="">
+                <option value="admin">Admin</option>
+                <option value="account">account</option>
+                <option value="tech">tech</option>
+            </select>
         </div>
 
         <!-- Password -->
@@ -49,4 +57,4 @@
             </x-primary-button>
         </div>
     </form>
-</x-guest-layout>
+</div>
