@@ -1,36 +1,53 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ config('app.name') }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+    <!-- Top Header -->
+    <header class="bg-dark text-white text-center py-3">
+        <h1>@yield('header')</h1>
+    </header>
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            @include('layouts.navigation')
-
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white dark:bg-gray-800 shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif
-
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+    <!-- Horizontal Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="#">Apex Project Management System</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                 
+                </ul>
+            </div>
         </div>
-    </body>
+    </nav>
+
+    <!-- Main Content Section -->
+    <div class="container-fluid">
+        <div class="row">
+
+            <!-- Left Side Nav Column -->
+            <aside class="col-md-3 col-lg-1 bg-light border-end p-4 min-vh-100">
+                <ul class="nav flex-column">
+                    <li class="nav-item"><a class="nav-link" href="#">Invoice</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Other</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Other</a></li>
+                </ul>
+            </aside>
+
+            <!-- Right Side Content Column -->
+            <main class="col-md-9 col-lg-10 p-5">
+                @yield('content')
+            </main>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
