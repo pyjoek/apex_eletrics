@@ -5,5 +5,5 @@ Projects
 @endsection
 
 @section('content')
-These are the ptojcts
+
 @endsection
