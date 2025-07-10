@@ -5,6 +5,7 @@ use App\Models\Project;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ProjectsExport;
 use App\Imports\ProjectsImport;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 use Illuminate\Http\Request;
 
@@ -14,6 +15,12 @@ class ProjectController extends Controller
     {
         $projects = Project::all();
         return view('dashboard')->with(['projects' => $projects]);
+    }
+
+    public function invoice()
+    {
+        $projects = Project::all();
+        return view('invoice.invoice')->with(['projects' => $projects]);
     }
 
     public function import(Request $request)
@@ -33,7 +40,7 @@ class ProjectController extends Controller
     public function exportPDF()
     {
         $projects = Project::all();
-        $pdf = Pdf::loadView('projects.pdf', compact('projects'));
+        $pdf = Pdf::loadView('invoice.pdf', compact('projects'));
         return $pdf->download('projects.pdf');
     }
 }

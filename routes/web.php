@@ -29,8 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
-
+Route::get('/invoice', [ProjectController::class, 'invoice'])->middleware(['auth', 'verified'])->name('invoice');
 Route::get('/dashboard', [ProjectController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::post('/projects/import', [ProjectController::class, 'import'])->name('projects.import');
 Route::get('/projects/export/excel', [ProjectController::class, 'exportExcel'])->name('projects.export.excel');
