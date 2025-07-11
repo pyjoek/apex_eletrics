@@ -59,23 +59,20 @@
             <tr>
                 <th>#</th>
                 <th>Project Name</th>
-                <th>Description</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($projects as $i => $project)
             <tr>
                 <td>{{ $i + 1 }}</td>
-                <td>{{ $project->project_name }}</td>
-                <td>{{ $project->description }}</td>
+                <td>{{ $project->project }}</td>
             </tr>
             @endforeach
         </tbody>
     </table>
 
-    <div class="footer">
+    <!-- <div class="footer">
         &copy; {{ date('Y') }} JR Institute — Project Report
-    </div>
-
+    </div> -->
 </body>
 </html>

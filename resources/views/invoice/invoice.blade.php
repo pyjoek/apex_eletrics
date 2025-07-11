@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('header')
-Projects
+Invoice
 @endsection
 
 @section('content')

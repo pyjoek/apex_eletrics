@@ -37,6 +37,6 @@ Route::get('/projects/export/excel', [ProjectController::class, 'exportExcel'])-
 Route::get('/projects/export/pdf', [ProjectController::class, 'exportPDF'])->name('projects.export.pdf');
 
 
-
+Route::get('/pdff', [ProjectController::class, 'display']);
 
 require __DIR__.'/auth.php';
