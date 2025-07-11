@@ -9,5 +9,10 @@ class Project extends Model
 {
     protected $fillable = ['project'];
 
+    public function invoice()
+    {
+        return $this->hasMany(Invoice::class);
+    }
+
     use HasFactory;
 }

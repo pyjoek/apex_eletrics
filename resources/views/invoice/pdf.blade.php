@@ -52,24 +52,32 @@
 </head>
 <body>
 
-    <h2>All Projects</h2>
-
+  <div class="table-section">
     <table>
         <thead>
             <tr>
-                <th>#</th>
                 <th>Project Name</th>
+                <th>Item Name</th>
+                <th>Unit</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Amount</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($projects as $i => $project)
+            @foreach($invoices as $invoice)
             <tr>
-                <td>{{ $i + 1 }}</td>
-                <td>{{ $project->project }}</td>
+                <td>{{ $invoice->project->project }}</td>
+                <td>{{ $invoice->item }}</td>
+                <td>{{ $invoice->unit }}</td>
+                <td>{{ $invoice->quantity }}</td>
+                <td>{{ $invoice->price }}</td>
+                <td>{{ $invoice->quantity * $invoice->price }}</td>
             </tr>
             @endforeach
         </tbody>
     </table>
+</div>
 
     <!-- <div class="footer">
         &copy; {{ date('Y') }} JR Institute — Project Report

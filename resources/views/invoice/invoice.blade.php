@@ -80,34 +80,59 @@ Invoice
 </style>
 
 <div class="form-section">
-    <form action="{{ route('projects.import') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('invoices.import') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <input type="file" name="file" required>
         <button type="submit">Import Excel</button>
     </form>
 
     <div class="export-links" style="margin-top: 15px;">
-        <a href="{{ route('projects.export.excel') }}">Export to Excel</a>
-        <a href="{{ route('projects.export.pdf') }}">Export to PDF</a>
+        <a href="{{ route('invoices.export.excel') }}">Export to Excel</a>
+        <a href="{{ route('invoices.export.pdf') }}">Export to PDF</a>
     </div>
+</div>
+
+<div class="form-section">
+    <form action="{{ route('new.invoice') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <select name="project">
+            @foreach ($project as $proj)
+            <option value="{{$proj->project}}">{{$proj->project}}</option>
+            @endforeach
+        </select>
+        <input type="text" name="item" placeholder="Item Name">
+        <input type="text" name="unit" placeholder="Unit">
+        <input type="number" name="quantity" placeholder="Quantity">
+        <input type="number" name="price" placeholder="Price">
+        <button type="submit">Insert</button>
+    </form>
 </div>
 
 <div class="table-section">
     <table>
         <thead>
             <tr>
-                <th>Name</th>
+                <th>Project Name</th>
+                <th>Item Name</th>
+                <th>Unit</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Amount</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($projects as $project)
+            @foreach($invoices as $invoice)
             <tr>
-                <td>{{ $project->project }}</td>
+                <td>{{ $invoice->project->project }}</td>
+                <td>{{ $invoice->item }}</td>
+                <td>{{ $invoice->unit }}</td>
+                <td>{{ $invoice->quantity }}</td>
+                <td>{{ $invoice->price }}</td>
+                <td>{{ $invoice->quantity * $invoice->price }}</td>
             </tr>
             @endforeach
         </tbody>
     </table>
 </div>
-
 
 @endsection
