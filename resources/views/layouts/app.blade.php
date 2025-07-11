@@ -38,6 +38,10 @@
                     <li class="nav-item"><a class="nav-link" href="/invoice">Invoice</a></li>
                     <li class="nav-item"><a class="nav-link" href="/pdff">Expense</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Other</a></li>
+                    <form action="{{ route('logout') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <button type="submit">Log out</button>
+                    </form>
                 </ul>
             </aside>
 

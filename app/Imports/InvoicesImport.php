@@ -15,7 +15,11 @@ class InvoicesImport implements ToModel
     public function model(array $row)
     {
         return new Invoice([
-            'project' => $row[0],
+            'project_id' => $row[0],
+            'item'       => $row[1],
+            'unit'       => $row[2],
+            'quantity'   => $row[3],
+            'price'      => $row[4],
         ]);
     }
 
