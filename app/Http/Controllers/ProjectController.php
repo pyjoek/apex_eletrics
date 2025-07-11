@@ -17,12 +17,21 @@ class ProjectController extends Controller
         return view('dashboard')->with(['projects' => $projects]);
     }
 
+    public function store(Request $request) {
+        $project = Project::create([
+            'project' => $request->project,
+        ]);
+
+        return redirect()->back();
+    }
+
     public function invoice()
     {
         $projects = Project::all();
         return view('invoice.invoice')->with(['projects' => $projects]);
     }
 
+    // export and importing starts here
     public function import(Request $request)
     {
         $request->validate(['file' => 'required|mimes:xlsx,xls']);

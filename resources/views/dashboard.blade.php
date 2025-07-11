@@ -79,11 +79,19 @@ Projects
     }
 </style>
 
+<div class="form-section">
+    <form action="{{ route('new.project') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <input type="text" name="project" placeholder="New Project">
+        <button type="submit">Add</button>
+    </form>
+</div>
+
 <div class="table-section">
     <table>
         <thead>
             <tr>
-                <th>Name</th>
+                <th>Project Name</th>
             </tr>
         </thead>
         <tbody>

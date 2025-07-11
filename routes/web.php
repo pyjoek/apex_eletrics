@@ -30,7 +30,8 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/invoice', [ProjectController::class, 'invoice'])->middleware(['auth', 'verified'])->name('invoice');
-Route::get('/dashboard', [ProjectController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/projects', [ProjectController::class, 'index'])->middleware(['auth', 'verified']);
+Route::post('/project', [ProjectController::class, 'store'])->name('new.project');
 Route::post('/projects/import', [ProjectController::class, 'import'])->name('projects.import');
 Route::get('/projects/export/excel', [ProjectController::class, 'exportExcel'])->name('projects.export.excel');
 Route::get('/projects/export/pdf', [ProjectController::class, 'exportPDF'])->name('projects.export.pdf');

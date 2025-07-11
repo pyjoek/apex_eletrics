@@ -34,6 +34,7 @@
             <!-- Left Side Nav Column -->
             <aside class="col-md-3 col-lg-1 bg-light border-end p-4 min-vh-100">
                 <ul class="nav flex-column">
+                    <li class="nav-item"><a class="nav-link" href="/projects">Projects</a></li>
                     <li class="nav-item"><a class="nav-link" href="/invoice">Invoice</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Expense</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Other</a></li>
