@@ -61,4 +61,11 @@ class InvoiceController extends Controller
         $pdf = Pdf::loadView('invoice.proforma', compact('invoices'));
         return $pdf->download('proforma.pdf');
     }
+
+     public function delivery()
+    {
+        $invoices = Invoice::all();
+        $pdf = Pdf::loadView('invoice.delivery', compact('invoices'));
+        return $pdf->download('delivery_note.pdf');
+    }
 }
