@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
     
     Route::post('/project', [ProjectController::class, 'store'])->name('new.project');
     Route::get('/projects', [ProjectController::class, 'index'])->middleware(['auth', 'verified']);
+    Route::get('/projects/{id}', [ProjectController::class, 'show'])->name('work');
     Route::post('/projects/import', [ProjectController::class, 'import'])->name('projects.import');
     Route::get('/projects/export/excel', [ProjectController::class, 'exportExcel'])->name('projects.export.excel');
     Route::get('/projects/export/pdf', [ProjectController::class, 'exportPDF'])->name('projects.export.pdf');
@@ -38,10 +39,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/invoice', [InvoiceController::class, 'index']);
     Route::post('/invoices', [InvoiceController::class, 'store'])->name('new.invoice');
     Route::post('/invoices/import', [InvoiceController::class, 'import'])->name('invoices.import');
-    Route::get('/invoices/export/excel', [InvoiceController::class, 'exportExcel'])->name('invoices.export.excel');
-    Route::get('/invoices/export/pdf', [InvoiceController::class, 'exportPDF'])->name('invoices.export.pdf');
-    Route::get('/profoma/export/pdf', [InvoiceController::class, 'profomaPDF'])->name('profoma.export.pdf');
-    Route::get('/delivery/export/pdf', [InvoiceController::class, 'delivery'])->name('delivery.export.pdf');
+    Route::get('/invoices/export/excel/{id}', [InvoiceController::class, 'exportExcel'])->name('invoices.export.excel');
+    Route::get('/invoices/export/pdf/{id}', [InvoiceController::class, 'exportPDF'])->name('invoices.export.pdf');
+    Route::get('/profoma/export/pdf/{id}', [InvoiceController::class, 'profomaPDF'])->name('profoma.export.pdf');
+    Route::get('/delivery/export/pdf/{id}', [InvoiceController::class, 'delivery'])->name('delivery.export.pdf');
     
     Route::get('/pdff', [ProjectController::class, 'display']);
 });

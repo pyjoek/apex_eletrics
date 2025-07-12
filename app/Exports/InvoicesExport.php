@@ -7,30 +7,32 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 
 class InvoicesExport implements FromCollection
 {
+    protected $project_id;
+
+    public function __construct($project_id)
+    {
+        $this->project_id = $project_id;
+    }
+
+    public function collection()
+    {
+        return Invoice::where('project_id', $this->project_id)
+                      ->select('item', 'unit', 'quantity', 'price')
+                      ->get();
+    }
+
+    public function headings(): array
+    {
+        return ['Item', 'Unit', 'Quantity', 'Price'];
+    }
+
     /**
     * @return \Illuminate\Support\Collection
     */
-    public function collection()
-    {
-        return Invoice::all();
-    }
+    // public function collection()
+    // {
+    //     return Invoice::all();
+    // }
 
-    public function exportExcel()
-    {
-        return Excel::download(new InvoiceExport, 'projects.xlsx');
-    }
 
-    public function exportPDF()
-    {
-        $projects = Invoice::all();
-        $pdf = Pdf::loadView('invoice.pdf', compact('invoice'));
-        return $pdf->download('invoice.pdf');
-    }
-
-    public function profomaPDF()
-    {
-        $invoices = Invoice::all();
-        $pdf = Pdf::loadView('invoice.proforma', compact('invoices'));
-        return $pdf->download('proforma.pdf');
-    }
 }

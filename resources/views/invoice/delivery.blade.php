@@ -67,6 +67,9 @@
             </tr>
         </thead>
         <tbody>
+            @php
+                $total = $invoices->sum(fn($inv) => $inv->price * $inv->quantity);
+            @endphp
             @foreach($invoices as $invoice)
             <tr>
                 <td>{{ $invoice->project->project }}</td>
@@ -77,6 +80,10 @@
                 <td>{{ $invoice->quantity * $invoice->price }}</td>
             </tr>
             @endforeach
+            <tr>
+                <td colspan="5">Total</td>
+                <td>{{$total}}</td>
+            </tr>
         </tbody>
     </table>
 </div>

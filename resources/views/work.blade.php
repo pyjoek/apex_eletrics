@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('header')
-Invoice
+{{ $projects->project }}
 @endsection
 
 @section('content')
@@ -80,53 +80,47 @@ Invoice
 </style>
 
 <div class="form-section">
-    <form action="{{ route('invoices.import') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <input type="file" name="file" required>
-        <button type="submit">Import Excel</button>
-    </form>
-</div>
 
-<div class="form-section">
-    <form action="{{ route('new.invoice') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <select name="project">
-            @foreach ($project as $proj)
-            <option value="{{$proj->project}}">{{$proj->project}}</option>
-            @endforeach
-        </select>
-        <input type="text" name="item" placeholder="Item Name">
-        <input type="text" name="unit" placeholder="Unit">
-        <input type="number" name="quantity" placeholder="Quantity">
-        <input type="number" name="price" placeholder="Price">
-        <button type="submit">Insert</button>
-    </form>
+    <div class="export-links" style="margin-top: 15px;">
+        <a href="{{ route('invoices.export.excel', $projects->id) }}">Export to Excel</a>
+        <a href="{{ route('invoices.export.pdf', $projects->id) }}">Export Invoice to PDF</a>
+        <a href="{{ route('profoma.export.pdf', $projects->id) }}">Export Profoma to PDF</a>
+        <a href="{{ route('delivery.export.pdf', $projects->id) }}">Export delivery to PDF</a>
+    </div>
 </div>
 
 <div class="table-section">
-    <table>
+    <table class="table table-striped">
         <thead>
             <tr>
-                <th>Project Name</th>
                 <th>Item Name</th>
-                <th>Unit</th>
-                <th>Quantity</th>
+                <th>Quantity&nbsp;/&nbsp;Unit</th>
                 <th>Price</th>
                 <th>Amount</th>
             </tr>
         </thead>
+
+        @php
+            $total = $invoices->sum(fn($inv) => $inv->price * $inv->quantity);
+        @endphp
+
         <tbody>
-            @foreach($invoices as $invoice)
-            <tr>
-                <td>{{ $invoice->project->project }}</td>
-                <td>{{ $invoice->item }}</td>
-                <td>{{ $invoice->unit }}</td>
-                <td>{{ $invoice->quantity }}</td>
-                <td>{{ $invoice->price }}</td>
-                <td>{{ $invoice->quantity * $invoice->price }}</td>
-            </tr>
+            @foreach ($invoices as $invoice)
+                <tr>
+                    <td>{{ $invoice->item }}</td>
+                    <td>{{ $invoice->quantity }} {{ $invoice->unit }}</td>
+                    <td>{{ $invoice->price }}</td>
+                    <td>{{ number_format($invoice->price * $invoice->quantity, 0) }}</td>
+                </tr>
             @endforeach
         </tbody>
+
+        <tfoot>
+            <tr class="fw-bold">
+                <td colspan="3" class="text-end">Total</td>
+                <td>{{ number_format($total, 0) }}</td>
+            </tr>
+        </tfoot>
     </table>
 </div>
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Project;
+use App\Models\Invoice;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ProjectsExport;
 use App\Imports\ProjectsImport;
@@ -15,6 +16,17 @@ class ProjectController extends Controller
     {
         $projects = Project::all();
         return view('dashboard')->with(['projects' => $projects]);
+    }
+
+    public function show(Request $request, $id)
+    {
+        $projects = Project::findOrFail($id);
+        $invoices = Invoice::where('project_id', $projects->id)->get();
+
+        return view('work')->with([
+            'projects' => $projects,
+            'invoices' => $invoices,
+        ]);
     }
 
     public function store(Request $request) {

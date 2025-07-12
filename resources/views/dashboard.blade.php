@@ -97,7 +97,7 @@ Projects
         <tbody>
             @foreach($projects as $project)
             <tr>
-                <td>{{ $project->project }}</td>
+                <td><a href="/projects/{{ $project->id }}">{{ $project->project }}</a></td>
             </tr>
             @endforeach
         </tbody>

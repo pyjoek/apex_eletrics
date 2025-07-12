@@ -43,29 +43,42 @@ class InvoiceController extends Controller
         return back()->with('success', 'invoices imported successfully.');
     }
 
-    public function exportExcel()
+    public function exportExcel($id)
     {
-        return Excel::download(new InvoicesExport, 'invoices.xlsx');
+        return Excel::download(new InvoicesExport($id), 'invoices.xlsx');
     }
 
-    public function exportPDF()
+    public function exportPDF($id)
     {
-        $invoices = Invoice::all();
-        $pdf = Pdf::loadView('invoice.pdf', compact('invoices'));
-        return $pdf->download('invoice.pdf');
+        $project = Project::findOrFail($id);
+        $invoices = Invoice::where('project_id', $id)->get();
+
+        $total = $invoices->sum(fn($inv) => $inv->price * $inv->quantity);
+
+        $pdf = Pdf::loadView('invoice.pdf', compact('project', 'invoices', 'total'));
+
+        return $pdf->download('invoices.pdf');
     }
 
-    public function profomaPDF()
+    public function profomaPDF($id)
     {
-        $invoices = Invoice::all();
-        $pdf = Pdf::loadView('invoice.proforma', compact('invoices'));
+        $project = Project::findOrFail($id);
+        $invoices = Invoice::where('project_id', $id)->get();
+
+        $total = $invoices->sum(fn($inv) => $inv->price * $inv->quantity);
+
+        $pdf = Pdf::loadView('invoice.proforma', compact('project', 'invoices', 'total'));
         return $pdf->download('proforma.pdf');
     }
 
-     public function delivery()
+     public function delivery($id)
     {
-        $invoices = Invoice::all();
-        $pdf = Pdf::loadView('invoice.delivery', compact('invoices'));
+        $project = Project::findOrFail($id);
+        $invoices = Invoice::where('project_id', $id)->get();
+
+        $total = $invoices->sum(fn($inv) => $inv->price * $inv->quantity);
+
+        $pdf = Pdf::loadView('invoice.delivery', compact('project', 'invoices', 'total'));
         return $pdf->download('delivery_note.pdf');
     }
 }
