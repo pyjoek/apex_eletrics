@@ -40,7 +40,7 @@
                     <li class="nav-item"><a class="nav-link" href="#">Other</a></li>
                     <form action="{{ route('logout') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <button type="submit">Log out</button>
+                        <button type="submit" class="btn btn-warning mt-4">Log out</button>
                     </form>
                 </ul>
             </aside>

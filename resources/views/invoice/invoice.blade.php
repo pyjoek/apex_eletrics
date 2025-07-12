@@ -88,7 +88,8 @@ Invoice
 
     <div class="export-links" style="margin-top: 15px;">
         <a href="{{ route('invoices.export.excel') }}">Export to Excel</a>
-        <a href="{{ route('invoices.export.pdf') }}">Export to PDF</a>
+        <a href="{{ route('invoices.export.pdf') }}">Export Invoice to PDF</a>
+        <a href="{{ route('profoma.export.pdf') }}">Export Profoma to PDF</a>
     </div>
 </div>
 

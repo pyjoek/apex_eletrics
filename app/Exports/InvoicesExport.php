@@ -26,4 +26,11 @@ class InvoicesExport implements FromCollection
         $pdf = Pdf::loadView('invoice.pdf', compact('invoice'));
         return $pdf->download('invoice.pdf');
     }
+
+    public function profomaPDF()
+    {
+        $invoices = Invoice::all();
+        $pdf = Pdf::loadView('invoice.proforma', compact('invoices'));
+        return $pdf->download('proforma.pdf');
+    }
 }

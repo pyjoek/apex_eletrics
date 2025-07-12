@@ -55,9 +55,10 @@ class InvoiceController extends Controller
         return $pdf->download('invoice.pdf');
     }
 
-    public function display()
+    public function profomaPDF()
     {
-        $invoice = Project::all();
-        return view('invoice.pdf', compact('invoice'));
+        $invoices = Invoice::all();
+        $pdf = Pdf::loadView('invoice.proforma', compact('invoices'));
+        return $pdf->download('proforma.pdf');
     }
 }

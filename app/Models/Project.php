@@ -14,5 +14,10 @@ class Project extends Model
         return $this->hasMany(Invoice::class);
     }
 
+    public function expense()
+    {
+        return $this->belongsTo(Expense::class);
+    }
+
     use HasFactory;
 }
