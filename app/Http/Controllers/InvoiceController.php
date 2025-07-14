@@ -48,37 +48,59 @@ class InvoiceController extends Controller
         return Excel::download(new InvoicesExport($id), 'invoices.xlsx');
     }
 
-    public function exportPDF($id)
+    public function exportPdf(Request $request, $id)
     {
-        $project = Project::findOrFail($id);
+        $project  = Project::findOrFail($id);
         $invoices = Invoice::where('project_id', $id)->get();
 
+        $data = [
+            'title'    => $request->input('title'),
+            'tax'      => $request->input('tax'),
+            'discount' => $request->input('discount'),
+            'terms'    => $request->input('terms'),
+        ];
+
         $total = $invoices->sum(fn($inv) => $inv->price * $inv->quantity);
+        return view('invoice.pdf', compact('project', 'invoices', 'total', 'data'));
 
-        $pdf = Pdf::loadView('invoice.pdf', compact('project', 'invoices', 'total'));
+        // $pdf = Pdf::loadView('invoice.pdf', compact('project', 'invoices', 'total', 'data'));
 
-        return $pdf->download('invoices.pdf');
+        // return $pdf->download('invoice.pdf');
     }
 
-    public function profomaPDF($id)
+    public function profomaPDF(Request $request, $id)
     {
         $project = Project::findOrFail($id);
         $invoices = Invoice::where('project_id', $id)->get();
 
+        $data = [
+            'title'    => $request->input('title'),
+            'tax'      => $request->input('tax'),
+            'discount' => $request->input('discount'),
+            'terms'    => $request->input('terms'),
+        ];
+
         $total = $invoices->sum(fn($inv) => $inv->price * $inv->quantity);
 
-        $pdf = Pdf::loadView('invoice.proforma', compact('project', 'invoices', 'total'));
+        $pdf = Pdf::loadView('invoice.proforma', compact('project', 'invoices', 'total', 'data'));
         return $pdf->download('proforma.pdf');
     }
 
-     public function delivery($id)
+     public function delivery(Request $request, $id)
     {
         $project = Project::findOrFail($id);
         $invoices = Invoice::where('project_id', $id)->get();
 
+        $data = [
+            'title'    => $request->input('title'),
+            'tax'      => $request->input('tax'),
+            'discount' => $request->input('discount'),
+            'terms'    => $request->input('terms'),
+        ];
+
         $total = $invoices->sum(fn($inv) => $inv->price * $inv->quantity);
 
-        $pdf = Pdf::loadView('invoice.delivery', compact('project', 'invoices', 'total'));
+        $pdf = Pdf::loadView('invoice.delivery', compact('project', 'invoices', 'total', 'data'));
         return $pdf->download('delivery_note.pdf');
     }
 }

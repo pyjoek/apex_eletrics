@@ -52,7 +52,7 @@
 </head>
 <body>
 
-<h1>Invoice</h1>
+<h1>{{$data['title']}}</h1>
 
   <div class="table-section">
     <table>
@@ -69,6 +69,9 @@
         <tbody>
             @php
                 $total = $invoices->sum(fn($inv) => $inv->price * $inv->quantity);
+                $tax = $total * ($data['tax'] / 100);
+                $discount = $total * ($data['discount'] / 100);
+                $newTotal = $total + $tax - $discount;
             @endphp
             @foreach($invoices as $invoice)
             <tr>
@@ -76,16 +79,35 @@
                 <td>{{ $invoice->item }}</td>
                 <td>{{ $invoice->unit }}</td>
                 <td>{{ $invoice->quantity }}</td>
-                <td>{{ $invoice->price }}</td>
-                <td>{{ $invoice->quantity * $invoice->price }}</td>
+                <td>{{ number_format($invoice->price, 0)}}</td>
+                <td>{{ number_format($invoice->quantity * $invoice->price, 0) }}</td>
             </tr>
             @endforeach
             <tr>
                 <td colspan="5">Total</td>
-                <td>{{$total}}</td>
+                <td>{{number_format($total, 0)}}</td>
+            </tr>
+            <tr>
+                <td colspan="5">VAT TAX {{$data['tax']}}%</td>
+                <td>{{number_format($tax, 0)}}</td>
+            </tr>
+            <tr>
+                <td colspan="5">Discount {{$data['discount']}}%</td>
+                <td>{{number_format($discount, 0)}}</td>
+            </tr>
+            <tr>
+                <td colspan="5">Gross Total</td>
+                <td>{{number_format($newTotal, 0)}}</td>
             </tr>
         </tbody>
     </table>
+</div>
+
+<div>
+    <h1>Terms and Conditions</h1>
+    <p>
+        <li>{{$data['terms']}}</li>
+    </p>
 </div>
 
     <!-- <div class="footer">

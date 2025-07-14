@@ -80,14 +80,35 @@
 </style>
 
 <div class="form-section">
+    <form id="export-form" method="GET" target="_blank">
+        {{-- Export Links --}}
+        <div class="export-links" style="margin-top: 15px;">
+            <button type="submit" class="export-btn" formaction="{{ route('invoices.export.excel', $projects->id) }}">
+                Export to Excel
+            </button>
+            <button type="submit" class="export-btn" formaction="{{ route('invoices.export.pdf', $projects->id) }}">
+                Export Invoice to PDF
+            </button>
+            <button type="submit" class="export-btn" formaction="{{ route('profoma.export.pdf', $projects->id) }}">
+                Export Proforma to PDF
+            </button>
+            <button type="submit" class="export-btn" formaction="{{ route('delivery.export.pdf', $projects->id) }}">
+                Export Delivery to PDF
+            </button>
+        </div>
 
-    <div class="export-links" style="margin-top: 15px;">
-        <a href="{{ route('invoices.export.excel', $projects->id) }}">Export to Excel</a>
-        <a href="{{ route('invoices.export.pdf', $projects->id) }}">Export Invoice to PDF</a>
-        <a href="{{ route('profoma.export.pdf', $projects->id) }}">Export Profoma to PDF</a>
-        <a href="{{ route('delivery.export.pdf', $projects->id) }}">Export delivery to PDF</a>
-    </div>
+        {{-- Shared Invoice Data --}}
+        <div style="margin-top: 20px; row">
+            <p>
+                <input class="col-5" type="text" name="title" placeholder="The Invoice title">
+                <input class="col-2" type="number" name="tax" placeholder="VAT tax">
+                <input class="col-2" type="number" name="discount" placeholder="Discount Percent">
+            </p>
+            <P style="width: 100%" class="col-6" ><textarea class="col-9" name="terms" placeholder="What are your terms"></textarea></P>
+        </div>
+    </form>
 </div>
+
 
 <div class="table-section">
     <table class="table table-striped">
