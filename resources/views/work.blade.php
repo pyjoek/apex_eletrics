@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+<link rel="stylesheet" href="{{asset('css/work.css')}}">
 @section('header')
 {{ $projects->project }}
 @endsection
@@ -7,8 +7,6 @@
 @section('content')
 
 <style>
-
-
     .form-section, .table-section {
         background-color: #fff;
         padding: 20px;
@@ -104,7 +102,8 @@
                 <input class="col-2" type="number" name="tax" placeholder="VAT tax">
                 <input class="col-2" type="number" name="discount" placeholder="Discount Percent">
             </p>
-            <P style="width: 100%" class="col-6" ><textarea class="col-9" name="terms" placeholder="What are your terms"></textarea></P>
+            <textarea class="col-9" name="terms" placeholder="- Payment in 30 days&#10;- No refunds&#10;- 1 year warranty"></textarea>
+
         </div>
     </form>
 </div>

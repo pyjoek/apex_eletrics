@@ -79,29 +79,62 @@ Projects
     }
 </style>
 
+<script>
+    function toggleView() {
+    const table = document.querySelector('.table-section');
+    const form = document.querySelector('.form-section');
+    const button = document.getElementById('toggle-btn'); // use an ID for the button
+
+    const isTableVisible = !table.classList.contains('hidden');
+
+    if (isTableVisible) {
+        table.classList.add('hidden');
+        form.classList.remove('hidden');
+        button.textContent = 'Back to Project List';
+    } else {
+        form.classList.add('hidden');
+        table.classList.remove('hidden');
+        button.textContent = 'Add New Project';
+    }
+}
+
+</script>
+
 <div class="form-section">
     <form action="{{ route('new.project') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <input type="text" name="project" placeholder="New Project">
         <button type="submit">Add</button>
     </form>
+    <button id="toggle-btn" class="btn" onclick="toggleView()">Add New Project</button>
 </div>
 
-<div class="table-section">
-    <table>
-        <thead>
-            <tr>
-                <th>Project Name</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($projects as $project)
-            <tr>
-                <td><a href="/projects/{{ $project->id }}">{{ $project->project }}</a></td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+<div>
+    <!-- display table of projects -->
+    <div class="table-section">
+        <table>
+            <thead>
+                <tr>
+                    <th>Project Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($projects as $project)
+                <tr>
+                    <td><a href="/projects/{{ $project->id }}">{{ $project->project }}</a></td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
+    <!-- add customer details -->
+     <form action="{{ route('new.project') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <input type="text" name="project" placeholder="New Project">
+        <button type="submit">Add</button>
+    </form>
+
 </div>
 
 

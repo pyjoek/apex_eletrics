@@ -53,11 +53,19 @@ class InvoiceController extends Controller
         $project  = Project::findOrFail($id);
         $invoices = Invoice::where('project_id', $id)->get();
 
+        $termsInput = $request->input('terms');
+
+        // Split each line into array items
+        $terms = preg_split('/\r\n|\r|\n/', $termsInput);
+
+        // Remove empty lines (optional)
+        $terms = array_filter(array_map('trim', $terms));
+
         $data = [
             'title'    => $request->input('title'),
             'tax'      => $request->input('tax'),
             'discount' => $request->input('discount'),
-            'terms'    => $request->input('terms'),
+            'terms'    => $terms
         ];
 
         $total = $invoices->sum(fn($inv) => $inv->price * $inv->quantity);
@@ -65,7 +73,7 @@ class InvoiceController extends Controller
 
         // $pdf = Pdf::loadView('invoice.pdf', compact('project', 'invoices', 'total', 'data'));
 
-        // return $pdf->download('invoice.pdf');
+        return $pdf->download('invoice.pdf');
     }
 
     public function profomaPDF(Request $request, $id)
@@ -73,11 +81,19 @@ class InvoiceController extends Controller
         $project = Project::findOrFail($id);
         $invoices = Invoice::where('project_id', $id)->get();
 
+        $termsInput = $request->input('terms');
+
+        // Split each line into array items
+        $terms = preg_split('/\r\n|\r|\n/', $termsInput);
+
+        // Remove empty lines (optional)
+        $terms = array_filter(array_map('trim', $terms));
+
         $data = [
             'title'    => $request->input('title'),
             'tax'      => $request->input('tax'),
             'discount' => $request->input('discount'),
-            'terms'    => $request->input('terms'),
+            'terms'    => $terms
         ];
 
         $total = $invoices->sum(fn($inv) => $inv->price * $inv->quantity);
@@ -91,11 +107,19 @@ class InvoiceController extends Controller
         $project = Project::findOrFail($id);
         $invoices = Invoice::where('project_id', $id)->get();
 
+        $termsInput = $request->input('terms');
+
+        // Split each line into array items
+        $terms = preg_split('/\r\n|\r|\n/', $termsInput);
+
+        // Remove empty lines (optional)
+        $terms = array_filter(array_map('trim', $terms));
+
         $data = [
             'title'    => $request->input('title'),
             'tax'      => $request->input('tax'),
             'discount' => $request->input('discount'),
-            'terms'    => $request->input('terms'),
+            'terms'    => $terms
         ];
 
         $total = $invoices->sum(fn($inv) => $inv->price * $inv->quantity);

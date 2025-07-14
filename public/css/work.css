@@ -1,0 +1,18 @@
+.terms-wrapper {
+    display: flex;             /* side–by–side */
+    align-items: flex-start;   /* align to the top */
+    gap: 2rem;                 /* space between columns */
+    margin-top: 1.5rem;
+}
+.terms-text {
+    flex: 1;                   /* take remaining space */
+}
+.terms-image {
+    flex: 0 0 200px;           /* fixed width column */
+    transform: rotate(45deg);  /* 45° rotation */
+}
+.terms-image img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
