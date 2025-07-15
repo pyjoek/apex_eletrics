@@ -80,62 +80,105 @@ Projects
 </style>
 
 <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const table = document.querySelector('.project');
+        const form = document.querySelector('.customer');
+        const button = document.getElementById('toggle-btn');
+        form.style.display = 'none';
+        table.style.display = 'block';
+        button.textContent = 'Go to Add Customer';
+    })
+    count = 0
     function toggleView() {
-    const table = document.querySelector('.table-section');
-    const form = document.querySelector('.form-section');
+    const table = document.querySelector('.project');
+    const form = document.querySelector('.customer');
     const button = document.getElementById('toggle-btn'); // use an ID for the button
 
-    const isTableVisible = !table.classList.contains('hidden');
-
-    if (isTableVisible) {
-        table.classList.add('hidden');
-        form.classList.remove('hidden');
-        button.textContent = 'Back to Project List';
+    
+    
+    if (count == 0) {
+        form.style.display = 'block';
+        table.style.display = 'none';
+        button.textContent = 'Go to Add New Project';
+        count = count + 1;
+        console.log(count)
     } else {
-        form.classList.add('hidden');
-        table.classList.remove('hidden');
-        button.textContent = 'Add New Project';
+        form.style.display = 'none';
+        table.style.display = 'block';
+        button.textContent = 'Go to Add Customer';
+        count = count - 1;
+        console.log(count)
     }
 }
 
 </script>
-
-<div class="form-section">
-    <form action="{{ route('new.project') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <input type="text" name="project" placeholder="New Project">
-        <button type="submit">Add</button>
-    </form>
-    <button id="toggle-btn" class="btn" onclick="toggleView()">Add New Project</button>
-</div>
-
-<div>
-    <!-- display table of projects -->
-    <div class="table-section">
-        <table>
-            <thead>
-                <tr>
-                    <th>Project Name</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($projects as $project)
-                <tr>
-                    <td><a href="/projects/{{ $project->id }}">{{ $project->project }}</a></td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+<center>
+    <div class="form-selectin">
+        <button id="toggle-btn" class="btn btn-primary" onclick="toggleView()">Add New Project</button>
     </div>
+    
+    <div class="project">
+        <div class="form-section">
+            <form action="{{ route('new.project') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <input type="text" name="project" placeholder="New Project">
+                <button type="submit">Add</button>
+            </form>
+        </div>
+    
+        <div>
+            <!-- display table of projects -->
+            <div class="table-section">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Project Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($projects as $project)
+                        <tr>
+                            <td><a href="/projects/{{ $project->id }}">{{ $project->project }}</a></td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <div class="customer">
+    <h1>Add Customer</h1>
 
-    <!-- add customer details -->
-     <form action="{{ route('new.project') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <input type="text" name="project" placeholder="New Project">
-        <button type="submit">Add</button>
-    </form>
-
+    <center>
+        <div class="form-section row">
+            <form action="{{ route('new.customer') }}" method="POST" enctype="multipart/form-data" class="col-6 mx-auto">
+                @csrf
+                <div class="mb-3">
+                    <input type="text" name="name" class="form-control" placeholder="Customer's Name">
+                </div>
+                <div class="mb-3">
+                    <input type="email" name="email" class="form-control" placeholder="Email">
+                </div>
+                <div class="mb-3">
+                    <input type="text" name="address" class="form-control" placeholder="Address">
+                </div>
+                <div class="mb-3">
+                    <input type="text" name="contact" class="form-control" placeholder="Contact">
+                </div>
+                <div class="mb-3">
+                    <input type="text" name="tin" class="form-control" placeholder="TIN">
+                </div>
+                <div class="mb-3">
+                    <input type="text" name="vrn" class="form-control" placeholder="VRN">
+                </div>
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+        </div>
+    </center>
 </div>
+
+</center>
 
 
 @endsection

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Tax Invoice</title>
     <style>
         body {
@@ -74,8 +75,45 @@
 </style>
 </head>
 <body>
+    <div class="row align-items-center">
+        <div class="col-3">
+            <h1>logo</h1>
+        </div>
 
-<h1>{{$data['title']}}</h1>
+        <div class="col-5">
+            <h4>TIN: {{$invoices->first()->customer->tin}}</h4>
+            <h4>VRN: {{$invoices->first()->customer->vrn}}</h4>
+        </div>
+
+        <div class="col-4">
+            Web: www.apexelectronics.co.tz<br>
+            Email: info@apexelectronics.co.tz<br>
+            Phone: +255 767 750 937<br>
+            MAKAO MAPYA ROAD NEAR CCM<br>
+            LEVOLOSI<br>
+            P.O.Box 8102 ARUSHA<br>
+            TANZAINIA
+        </div>
+    </div>
+
+<center>
+    <h1>TAX INVOICE</h1>
+    <h2>{{$data['title']}}</h2>
+</center>
+
+<div class="row">
+    <div class="col-9">
+        <p><h1>BILL TO:</h1></p>
+
+    </div>
+
+    <div class="col-3">
+        <input type="date" name="date" id="">
+        <p>INV.NO: {{$invoices->first()->id}}</p>
+    </div>
+</div>
+
+
 
   <div class="table-section">
     <table>

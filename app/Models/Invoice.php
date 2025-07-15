@@ -9,11 +9,16 @@ class Invoice extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['project_id', 'item', 'unit', 'quantity', 'price'];
+    protected $fillable = ['project_id', 'customer_id','item', 'unit', 'quantity', 'price'];
 
     public function project()
     {
         return $this->belongsTo(Project::class);
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
     }
 
     public function expense()

@@ -95,6 +95,11 @@ Invoice
             <option value="{{$proj->project}}">{{$proj->project}}</option>
             @endforeach
         </select>
+        <select name="customer">
+            @foreach ($customer as $cust)
+            <option value="{{$cust->name}}">{{$cust->name}}</option>
+            @endforeach
+        </select>
         <input type="text" name="item" placeholder="Item Name">
         <input type="text" name="unit" placeholder="Unit">
         <input type="number" name="quantity" placeholder="Quantity">
@@ -108,6 +113,7 @@ Invoice
         <thead>
             <tr>
                 <th>Project Name</th>
+                <th>Customer Name</th>
                 <th>Item Name</th>
                 <th>Unit</th>
                 <th>Quantity</th>
@@ -119,6 +125,7 @@ Invoice
             @foreach($invoices as $invoice)
             <tr>
                 <td>{{ $invoice->project->project }}</td>
+                <td>{{ $invoice->customer->name }}</td>
                 <td>{{ $invoice->item }}</td>
                 <td>{{ $invoice->unit }}</td>
                 <td>{{ $invoice->quantity }}</td>

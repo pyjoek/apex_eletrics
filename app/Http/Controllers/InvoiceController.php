@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Models\Invoice;
+use App\Models\Customer;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\InvoicesExport;
 use App\Imports\InvoicesImport;
@@ -15,15 +16,18 @@ class InvoiceController extends Controller
     {
         $project = Project::all();
         $invoices = Invoice::all();
-        return view('invoice.invoice', compact(['project', 'invoices']));
+        $customer = Customer::all();
+        return view('invoice.invoice', compact(['project', 'invoices', 'customer']));
     }
-
+    
     public function store(Request $request)
     {
         $proj = Project::where('project', $request->project)->first();
+        $cust = Customer::where('name', $request->customer)->first();
 
         $invoice = Invoice::create([
             'project_id' => $proj->id,
+            'customer_id' => $cust->id,
             'item' => $request->item,
             'unit' => $request->unit,
             'quantity' => $request->quantity,
@@ -51,7 +55,10 @@ class InvoiceController extends Controller
     public function exportPdf(Request $request, $id)
     {
         $project  = Project::findOrFail($id);
-        $invoices = Invoice::where('project_id', $id)->get();
+        // $invoices = Invoice::where('project_id', $id)->get();
+        $invoices = Invoice::with('customer')->where('project_id', $id)->get();
+
+        // dd($invoices->first()->customer->name);
 
         $termsInput = $request->input('terms');
 

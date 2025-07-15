@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,6 +47,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/delivery/export/pdf/{id}', [InvoiceController::class, 'delivery'])->name('delivery.export.pdf');
     
     Route::get('/pdff', [ProjectController::class, 'display']);
+
+    Route::post('/customer', [CustomerCOntroller::class, 'store'])->name('new.customer');
 });
 
 require __DIR__.'/auth.php';
