@@ -122,21 +122,20 @@
         </td>
     </tr>
 </table>
-
-    
+ 
 <center>
-    <h1>TAX INVOICE</h1>
+    <h3>TAX INVOICE</h3>
     <h2>{{$data['title']}}</h2>
 </center>
 
 <table style="width: 100%; border-collapse: collapse; border: 1px solid white;">
     <tr style="border: 1px solid white;">
         <td style="border: 1px solid white; width: 100px;">
-            <h1>BILL TO:</h1>
-            Web: www.apexelectronics.co.tz<br>
-            Email: info@apexelectronics.co.tz<br>
-            Phone: +255 767 750 937<br>
-            MAKAO MAPYA ROAD NEAR CCM<br>
+            <h3>BILL TO:</h3>
+            {{$invoices->first()->customer->name}}<br>
+            {{$invoices->first()->customer->email}}<br>
+            {{$invoices->first()->customer->address}}<br>
+            {{$invoices->first()->customer->contact}}<br>
         </td>
         <td style="border: 1px solid white; text-align: right; width: 100%; padding-left: 0;">
             {{ date('Y/M/d') }}
@@ -149,6 +148,7 @@
     <table>
         <thead>
             <tr>
+                <th>S/N</th>
                 <th>Item Name</th>
                 <th>Unit</th>
                 <th>Quantity</th>
@@ -168,8 +168,9 @@
                 );
 
             @endphp
-            @foreach($invoices as $invoice)
+            @foreach($invoices as $index => $invoice)
             <tr>
+                <td>{{ $index + 1}}</td>
                 <td>{{ $invoice->item }}</td>
                 <td>{{ $invoice->unit }}</td>
                 <td>{{ $invoice->quantity }}</td>
@@ -178,19 +179,19 @@
             </tr>
             @endforeach
             <tr>
-                <td colspan="4">Total</td>
+                <td colspan="5">Total</td>
                 <td>{{number_format($total, 0)}}</td>
             </tr>
             <tr>
-                <td colspan="4">VAT TAX {{$data['tax']}}%</td>
+                <td colspan="5">VAT TAX {{$data['tax']}}%</td>
                 <td>{{number_format($tax, 0)}}</td>
             </tr>
             <tr>
-                <td colspan="4">Discount {{$data['discount']}}%</td>
+                <td colspan="5">Discount {{$data['discount']}}%</td>
                 <td>{{number_format($discount, 0)}}</td>
             </tr>
             <tr>
-                <td colspan="4">Gross Total</td>
+                <td colspan="5">Gross Total</td>
                 <td>{{number_format($newTotal, 0)}}</td>
             </tr>
         </tbody>
@@ -210,6 +211,16 @@
     <div class="terms-image">
         <img src="{{ public_path('img/stamp.png') }}" alt="Company stamp">
     </div>
+</div>
+
+<div>
+    BANK DETAILS<br>
+    ACCOUNT NAME: APEX ELECTRICS LIMITED<br>
+    ACCOUNT NUMBER: 40810136201<br>
+    BANK NAME: NMB<br>
+    BRANCH: CLOCK TOWER<br>
+    SWIFT: NMIIBTZTZ<br>
+    BRANCH CODE: 408
 </div>
 
 </body>

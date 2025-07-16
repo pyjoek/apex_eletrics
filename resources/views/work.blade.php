@@ -77,71 +77,73 @@
     }
 </style>
 
-<div class="form-section">
-    <form id="export-form" method="GET" target="_blank">
-        {{-- Export Links --}}
-        <div class="export-links" style="margin-top: 15px;">
-            <button type="submit" class="export-btn" formaction="{{ route('invoices.export.excel', $projects->id) }}">
-                Export to Excel
-            </button>
-            <button type="submit" class="export-btn" formaction="{{ route('invoices.export.pdf', $projects->id) }}">
-                Export Invoice to PDF
-            </button>
-            <button type="submit" class="export-btn" formaction="{{ route('profoma.export.pdf', $projects->id) }}">
-                Export Proforma to PDF
-            </button>
-            <button type="submit" class="export-btn" formaction="{{ route('delivery.export.pdf', $projects->id) }}">
-                Export Delivery to PDF
-            </button>
-        </div>
-
-        {{-- Shared Invoice Data --}}
-        <div style="margin-top: 20px; row">
-            <p>
-                <input class="col-5" type="text" name="title" placeholder="The Invoice title">
-                <input class="col-2" type="number" name="tax" placeholder="VAT tax">
-                <input class="col-2" type="number" name="discount" placeholder="Discount Percent">
-            </p>
-            <textarea class="col-9" name="terms" placeholder="- Payment in 30 days&#10;- No refunds&#10;- 1 year warranty"></textarea>
-
-        </div>
-    </form>
-</div>
-
-
-<div class="table-section">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Item Name</th>
-                <th>Quantity&nbsp;/&nbsp;Unit</th>
-                <th>Price</th>
-                <th>Amount</th>
-            </tr>
-        </thead>
-
-        @php
-            $total = $invoices->sum(fn($inv) => $inv->price * $inv->quantity);
-        @endphp
-
-        <tbody>
-            @foreach ($invoices as $invoice)
+<center>
+    <div class="form-section">
+        <form id="export-form" method="GET" target="_blank">
+            {{-- Export Links --}}
+            <div class="export-links" style="margin-top: 15px;">
+                <button type="submit" class="export-btn" formaction="{{ route('invoices.export.excel', $projects->id) }}">
+                    Export to Excel
+                </button>
+                <button type="submit" class="export-btn" formaction="{{ route('invoices.export.pdf', $projects->id) }}">
+                    Export Invoice to PDF
+                </button>
+                <button type="submit" class="export-btn" formaction="{{ route('profoma.export.pdf', $projects->id) }}">
+                    Export Proforma to PDF
+                </button>
+                <button type="submit" class="export-btn" formaction="{{ route('delivery.export.pdf', $projects->id) }}">
+                    Export Delivery to PDF
+                </button>
+            </div>
+    
+            {{-- Shared Invoice Data --}}
+            <div style="margin-top: 20px; row">
+                <p>
+                    <input class="col-5" type="text" name="title" placeholder="The Invoice title">
+                    <input class="col-2" type="number" name="tax" placeholder="VAT tax">
+                    <input class="col-2" type="number" name="discount" placeholder="Discount Percent">
+                </p>
+                <textarea class="col-9" name="terms" placeholder="- Payment in 30 days&#10;- No refunds&#10;- 1 year warranty"></textarea>
+    
+            </div>
+        </form>
+    </div>
+    
+    
+    <div class="table-section">
+        <table class="table table-striped">
+            <thead>
                 <tr>
-                    <td>{{ $invoice->item }}</td>
-                    <td>{{ $invoice->quantity }} {{ $invoice->unit }}</td>
-                    <td>{{ $invoice->price }}</td>
-                    <td>{{ number_format($invoice->price * $invoice->quantity, 0) }}</td>
+                    <th>Item Name</th>
+                    <th>Quantity&nbsp;/&nbsp;Unit</th>
+                    <th>Price</th>
+                    <th>Amount</th>
                 </tr>
-            @endforeach
-        </tbody>
-
-        <tfoot>
-            <tr class="fw-bold">
-                <td colspan="3" class="text-end">Total</td>
-                <td>{{ number_format($total, 0) }}</td>
-            </tr>
-        </tfoot>
-    </table>
-</div>
+            </thead>
+    
+            @php
+                $total = $invoices->sum(fn($inv) => $inv->price * $inv->quantity);
+            @endphp
+    
+            <tbody>
+                @foreach ($invoices as $invoice)
+                    <tr>
+                        <td>{{ $invoice->item }}</td>
+                        <td>{{ $invoice->quantity }} {{ $invoice->unit }}</td>
+                        <td>{{ $invoice->price }}</td>
+                        <td>{{ number_format($invoice->price * $invoice->quantity, 0) }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+    
+            <tfoot>
+                <tr class="fw-bold">
+                    <td colspan="3" class="text-end">Total</td>
+                    <td>{{ number_format($total, 0) }}</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</center>
 
 @endsection
