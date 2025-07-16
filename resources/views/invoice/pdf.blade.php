@@ -3,8 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+     <link href="{{ public_path('css/bootstrap-grid.min.css') }}" rel="stylesheet" media="all">
     <title>Tax Invoice</title>
+    <style>
+    /* ---- Bootstrap‑like grid for PDF ---- */
+    /* .row { display:flex; flex-wrap:wrap; } */
+    .col-1 { flex:0 0 8.333%; max-width:8.333%; }
+    .col-2 { flex:0 0 16.666%; max-width:16.666%; }
+    .col-3 { flex:0 0 25%; max-width:25%; }
+    .col-4 { flex:0 0 33.333%; max-width:33.333%; }
+    .col-5 { flex:0 0 41.666%; max-width:41.666%; }
+    .col-6 { flex:0 0 50%; max-width:50%; }
+    /* add other .col-* as needed */
+    .align-items-center { align-items:center; }
+    .text-center { text-align:center; }
+    </style>
+
+    <style>
+        /* --- Minimal grid for PDF (only what we need) --- */
+        /* .row { display: flex; flex-wrap: wrap;} */
+        .rowd { display: flex; flex-direction: row}
+        .col-3 { flex: 0 0 25%; max-width: 25%; }
+        .col-4 { flex: 0 0 33.3333%; max-width: 33.3333%; }
+        .col-5 { flex: 0 0 41.6667%; max-width: 41.6667%; }
+        .align-items-center { align-items: center; }
+        .text-center { text-align: center; }
+    </style>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -75,45 +101,49 @@
 </style>
 </head>
 <body>
-    <div class="row align-items-center">
-        <div class="col-3">
-            <h1>logo</h1>
-        </div>
 
-        <div class="col-5">
-            <h4>TIN: {{$invoices->first()->customer->tin}}</h4>
-            <h4>VRN: {{$invoices->first()->customer->vrn}}</h4>
-        </div>
-
-        <div class="col-4">
+<table style="width: 100%; border-collapse: collapse; border: 1px solid white;">
+    <tr style="border: 1px solid white;">
+        <td style="border: 1px solid white; width: 100px;">
+            <img src="{{ public_path('img/logo.jpeg') }}" style="width: 100px;" alt="Company Logo">
+        </td>
+        <td style="border: 1px solid white; width: 200px; text-align: right; padding-left: 10px;">
+            <h4 style="margin: 0;">TIN: {{ $invoices->first()->customer->tin }}</h4>
+            <h4 style="margin: 0;">VRN: {{ $invoices->first()->customer->vrn }}</h4>
+        </td>
+        <td style="border: 1px solid white; text-align: right; width: 100%; padding-left: 0;">
             Web: www.apexelectronics.co.tz<br>
             Email: info@apexelectronics.co.tz<br>
             Phone: +255 767 750 937<br>
             MAKAO MAPYA ROAD NEAR CCM<br>
             LEVOLOSI<br>
             P.O.Box 8102 ARUSHA<br>
-            TANZAINIA
-        </div>
-    </div>
+            TANZANIA
+        </td>
+    </tr>
+</table>
 
+    
 <center>
     <h1>TAX INVOICE</h1>
     <h2>{{$data['title']}}</h2>
 </center>
 
-<div class="row">
-    <div class="col-9">
-        <p><h1>BILL TO:</h1></p>
-
-    </div>
-
-    <div class="col-3">
-        <input type="date" name="date" id="">
-        <p>INV.NO: {{$invoices->first()->id}}</p>
-    </div>
-</div>
-
-
+<table style="width: 100%; border-collapse: collapse; border: 1px solid white;">
+    <tr style="border: 1px solid white;">
+        <td style="border: 1px solid white; width: 100px;">
+            <h1>BILL TO:</h1>
+            Web: www.apexelectronics.co.tz<br>
+            Email: info@apexelectronics.co.tz<br>
+            Phone: +255 767 750 937<br>
+            MAKAO MAPYA ROAD NEAR CCM<br>
+        </td>
+        <td style="border: 1px solid white; text-align: right; width: 100%; padding-left: 0;">
+            {{ date('Y/M/d') }}
+            <p>INV.NO: {{$invoices->first()->id}}</p>   
+        </td>
+    </tr>
+</table>
 
   <div class="table-section">
     <table>
