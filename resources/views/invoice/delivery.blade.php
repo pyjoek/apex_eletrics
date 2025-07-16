@@ -3,7 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+     <link href="{{ public_path('css/bootstrap-grid.min.css') }}" rel="stylesheet" media="all">
     <title>Delivery Note</title>
+    <style>
+    /* ---- Bootstrap‑like grid for PDF ---- */
+    /* .row { display:flex; flex-wrap:wrap; } */
+    .col-1 { flex:0 0 8.333%; max-width:8.333%; }
+    .col-2 { flex:0 0 16.666%; max-width:16.666%; }
+    .col-3 { flex:0 0 25%; max-width:25%; }
+    .col-4 { flex:0 0 33.333%; max-width:33.333%; }
+    .col-5 { flex:0 0 41.666%; max-width:41.666%; }
+    .col-6 { flex:0 0 50%; max-width:50%; }
+    /* add other .col-* as needed */
+    .align-items-center { align-items:center; }
+    .text-center { text-align:center; }
+    </style>
+
+    <style>
+        /* --- Minimal grid for PDF (only what we need) --- */
+        /* .row { display: flex; flex-wrap: wrap;} */
+        .rowd { display: flex; flex-direction: row}
+        .col-3 { flex: 0 0 25%; max-width: 25%; }
+        .col-4 { flex: 0 0 33.3333%; max-width: 33.3333%; }
+        .col-5 { flex: 0 0 41.6667%; max-width: 41.6667%; }
+        .align-items-center { align-items: center; }
+        .text-center { text-align: center; }
+    </style>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -75,18 +102,57 @@
 </head>
 <body>
 
+<table style="width: 100%; border-collapse: collapse; border: 1px solid white;">
+    <tr style="border: 1px solid white;">
+        <td style="border: 1px solid white; width: 100px;">
+            <img src="{{ public_path('img/logo.jpeg') }}" style="width: 100px;" alt="Company Logo">
+        </td>
+        <td style="border: 1px solid white; width: 200px; text-align: right; padding-left: 10px;">
+            <h4 style="margin: 0;">TIN: {{ $invoices->first()->customer->tin }}</h4>
+            <h4 style="margin: 0;">VRN: {{ $invoices->first()->customer->vrn }}</h4>
+        </td>
+        <td style="border: 1px solid white; text-align: right; width: 100%; padding-left: 0;">
+            Web: www.apexelectronics.co.tz<br>
+            Email: info@apexelectronics.co.tz<br>
+            Phone: +255 767 750 937<br>
+            MAKAO MAPYA ROAD NEAR CCM<br>
+            LEVOLOSI<br>
+            P.O.Box 8102 ARUSHA<br>
+            TANZANIA
+        </td>
+    </tr>
+</table>
+ 
+<center>
+    <h3>DELIVERY NOTE</h3>
+    <h2>{{$data['title']}}</h2>
+</center>
 
-<h1>{{$data['title']}}</h1>
+<table style="width: 100%; border-collapse: collapse; border: 1px solid white;">
+    <tr style="border: 1px solid white;">
+        <td style="border: 1px solid white; width: 100px;">
+            <h3>BILL TO:</h3>
+            {{$invoices->first()->customer->name}}<br>
+            {{$invoices->first()->customer->email}}<br>
+            {{$invoices->first()->customer->address}}<br>
+            {{$invoices->first()->customer->contact}}<br>
+        </td>
+        <td style="border: 1px solid white; text-align: right; width: 100%; padding-left: 0;">
+            {{ date('Y/M/d') }}
+            <p>INV.NO: {{$invoices->first()->id}}</p>   
+        </td>
+    </tr>
+</table>
 
   <div class="table-section">
     <table>
         <thead>
             <tr>
+                <th>S/N</th>
                 <th>Item Name</th>
                 <th>Unit</th>
                 <th>Quantity</th>
-                <th>Price</th>
-                <th>Amount</th>
+                <th>Remarks</th>
             </tr>
         </thead>
         <tbody>
@@ -95,32 +161,21 @@
                 $tax = $total * ($data['tax'] / 100);
                 $discount = $total * ($data['discount'] / 100);
                 $newTotal = $total + $tax - $discount;
+
+                $stampBase64 = 'data:image/png;base64,' . base64_encode(
+                    file_get_contents(public_path('img/stamp.png'))
+                );
+
             @endphp
-            @foreach($invoices as $invoice)
+            @foreach($invoices as $index => $invoice)
             <tr>
+                <td>{{ $index + 1}}</td>
                 <td>{{ $invoice->item }}</td>
                 <td>{{ $invoice->unit }}</td>
                 <td>{{ $invoice->quantity }}</td>
-                <td>{{ number_format($invoice->price, 0)}}</td>
-                <td>{{ number_format($invoice->quantity * $invoice->price, 0) }}</td>
+                <td></td>
             </tr>
             @endforeach
-            <tr>
-                <td colspan="4">Total</td>
-                <td>{{number_format($total, 0)}}</td>
-            </tr>
-            <tr>
-                <td colspan="4">VAT TAX {{$data['tax']}}%</td>
-                <td>{{number_format($tax, 0)}}</td>
-            </tr>
-            <tr>
-                <td colspan="4">Discount {{$data['discount']}}%</td>
-                <td>{{number_format($discount, 0)}}</td>
-            </tr>
-            <tr>
-                <td colspan="4">Gross Total</td>
-                <td>{{number_format($newTotal, 0)}}</td>
-            </tr>
         </tbody>
     </table>
 </div>
@@ -131,7 +186,7 @@
         <ul>
             @foreach ($data['terms'] as $term)
                 <li>{{ $term }}</li>
-            @endforeach
+            @endforeach 
         </ul>
     </div>
 
@@ -140,8 +195,15 @@
     </div>
 </div>
 
-    <!-- <div class="footer">
-        &copy; {{ date('Y') }} JR Institute — Project Report
-    </div> -->
+<div>
+    BANK DETAILS<br>
+    ACCOUNT NAME: APEX ELECTRICS LIMITED<br>
+    ACCOUNT NUMBER: 40810136201<br>
+    BANK NAME: NMB<br>
+    BRANCH: CLOCK TOWER<br>
+    SWIFT: NMIIBTZTZ<br>
+    BRANCH CODE: 408
+</div>
+
 </body>
 </html>
