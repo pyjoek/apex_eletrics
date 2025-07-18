@@ -133,12 +133,14 @@ Projects
                     <thead>
                         <tr>
                             <th>Project Name</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($projects as $project)
                         <tr>
-                            <td><a href="/projects/{{ $project->id }}">{{ $project->project }}</a></td>
+                            <td>{{ $project->project }}</td>
+                            <td><a href="/projects/{{ $project->id }}">Invoice</a></td>
                         </tr>
                         @endforeach
                     </tbody>

@@ -36,7 +36,7 @@
                 <ul class="nav flex-column">
                     <li class="nav-item"><a class="nav-link" href="{{ route('profile.show')}}">Profile</a></li>
                     <li class="nav-item"><a class="nav-link" href="/projects">Projects</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/invoice">Invoice</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/invoice">Add Items</a></li>
                     <li class="nav-item"><a class="nav-link" href="">Expense</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Other</a></li>
                     <form action="{{ route('logout') }}" method="POST" enctype="multipart/form-data">

@@ -108,8 +108,8 @@
             <img src="{{ public_path('img/logo.jpeg') }}" style="width: 100px;" alt="Company Logo">
         </td>
         <td style="border: 1px solid white; width: 200px; text-align: right; padding-left: 10px;">
-            <h4 style="margin: 0;">TIN: {{ $invoices->first()->customer->tin }}</h4>
-            <h4 style="margin: 0;">VRN: {{ $invoices->first()->customer->vrn }}</h4>
+            <h4 style="margin: 0;">TIN: 151-621-767</h4>
+            <h4 style="margin: 0;">VRN: 400-48777-N</h4>
         </td>
         <td style="border: 1px solid white; text-align: right; width: 100%; padding-left: 0;">
             Web: www.apexelectronics.co.tz<br>
@@ -130,14 +130,18 @@
 
 <table style="width: 100%; border-collapse: collapse; border: 1px solid white;">
     <tr style="border: 1px solid white;">
-        <td style="border: 1px solid white; width: 100px;">
+        <!-- Make this column 60% -->
+        <td style="border: 1px solid white; width: 70%; vertical-align: top;">
             <h3>BILL TO:</h3>
-            {{$invoices->first()->customer->name}}<br>
-            {{$invoices->first()->customer->email}}<br>
-            {{$invoices->first()->customer->address}}<br>
-            {{$invoices->first()->customer->contact}}<br>
+            Name: {{$invoices->first()->customer->name}}<br>
+            Email: {{$invoices->first()->customer->email}}<br>
+            Address: {{$invoices->first()->customer->address}}<br>
+            Contact: {{$invoices->first()->customer->contact}}<br>
+            TIN No.: {{$invoices->first()->customer->tin}}<br>
+            VRN No.: {{$invoices->first()->customer->vrn}}<br>
         </td>
-        <td style="border: 1px solid white; text-align: right; width: 100%; padding-left: 0;">
+        <!-- Make this column 40% -->
+        <td style="border: 1px solid white; text-align: right; width: 30%; vertical-align: top;">
             {{ date('Y/M/d') }}
             <p>INV.NO: {{$invoices->first()->id}}</p>   
         </td>
