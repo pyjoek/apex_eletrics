@@ -128,19 +128,18 @@ Projects
     
         <div>
             <!-- display table of projects -->
-            <div class="table-section">
+            <div class="table-section" style="width: 70%">
                 <table>
                     <thead>
                         <tr>
-                            <th>Project Name</th>
-                            <th></th>
+                            <th colspan="2"><center>Project Name</center></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($projects as $project)
                         <tr>
                             <td>{{ $project->project }}</td>
-                            <td><a href="/projects/{{ $project->id }}">Invoice</a></td>
+                            <td><a href="/projects/{{ $project->id }}"><center><button class="btn btn-secondary">Invoice</button></center></a></td>
                         </tr>
                         @endforeach
                     </tbody>

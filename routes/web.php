@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
@@ -45,10 +46,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/invoices/export/pdf/{id}', [InvoiceController::class, 'exportPDF'])->name('invoices.export.pdf');
     Route::get('/profoma/export/pdf/{id}', [InvoiceController::class, 'profomaPDF'])->name('profoma.export.pdf');
     Route::get('/delivery/export/pdf/{id}', [InvoiceController::class, 'delivery'])->name('delivery.export.pdf');
+
+    Route::get('/expense', [ExpenseController::class, 'index']);
     
     Route::get('/pdff', [ProjectController::class, 'display']);
 
     Route::post('/customer', [CustomerCOntroller::class, 'store'])->name('new.customer');
+
+
 });
 
 require __DIR__.'/auth.php';
