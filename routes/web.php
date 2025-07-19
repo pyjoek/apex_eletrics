@@ -48,6 +48,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/delivery/export/pdf/{id}', [InvoiceController::class, 'delivery'])->name('delivery.export.pdf');
 
     Route::get('/expense', [ExpenseController::class, 'index']);
+    Route::post('/expense', [ExpenseController::class, 'store'])->name('new.expense');
     
     Route::get('/pdff', [ProjectController::class, 'display']);
 

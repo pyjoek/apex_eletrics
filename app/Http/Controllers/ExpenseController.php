@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Expense;
+use App\Models\Project;
 use Illuminate\Http\Request;
 
 class ExpenseController extends Controller
@@ -9,7 +10,8 @@ class ExpenseController extends Controller
     public function index()
     {
         $expense = Expense::all();
-        return view('expense.expense', compact('expense'));
+        $project = Project::all();
+        return view('expense.expense', compact(['expense', 'project']));
     }
 
     public function store(Request $request)
