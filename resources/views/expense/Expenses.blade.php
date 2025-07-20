@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('header')
-Add Item to Project
+{{ $expense->first()->project->project }} Expenses Page
 @endsection
 
 @section('content')
@@ -29,7 +29,7 @@ Add Item to Project
         padding: 8px 16px;
         border-radius: 5px;
         cursor: pointer;
-    }
+    }Invoice
 
     .form-section button:hover {
         background-color: #0b5ed7;
@@ -87,9 +87,9 @@ Add Item to Project
             <button type="submit">Import Excel</button>
         </form>
     </div>
-    
+
     <div class="table-section">
-        <table>
+         <table>
             <thead>
                 <tr>
                     <th>Item Name</th>
@@ -100,16 +100,30 @@ Add Item to Project
                 </tr>
             </thead>
             <tbody>
+                @php
+                    $total = $invoices->sum(fn($inv) => $inv->price * $inv->quantity);
+                    $expen = $expense->sum(fn($inv) => $inv->price * $inv->quantity);
+                @endphp
                 
                 @foreach($expense as $invoice)
                 <tr>
                     <td>{{ $invoice->item }}</td>
                     <td>{{ $invoice->unit }}</td>
                     <td>{{ $invoice->quantity }}</td>
-                    <td>{{ $invoice->price }}</td>
-                    <td>{{ $invoice->quantity * $invoice->price }}</td>
+                    <td>{{ number_format($invoice->price, 0) }}</td>
+                    <td>{{ number_format($invoice->quantity * $invoice->price, 0) }}</td>
                 </tr>
                 @endforeach
+                <tr>
+                    <td colspan="3"></td>
+                    <td>Invoice</td>
+                    <td>{{number_format($total, 0)}}</td>
+                </tr>
+                <tr>
+                    <td colspan="3"></td>
+                    <td>Remaining</td>
+                    <td>{{number_format($total - $expen)}}</td>
+                </tr>
             </tbody>
         </table>
     </div>
