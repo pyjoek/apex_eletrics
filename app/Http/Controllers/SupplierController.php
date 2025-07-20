@@ -11,6 +11,11 @@ class SupplierController extends Controller
     {
         $supl = Supplier::all();
         $project = Project::all();
-        return view('purchase.purchase', compact(['supl', 'project']));
+        return view('expense.expense', compact(['supl', 'project']));
+    }
+
+    public function store()
+    {
+        
     }
 }

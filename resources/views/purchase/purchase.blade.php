@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('header')
-Add Expense to Project
+Purchase Order
 @endsection
 
 @section('content')

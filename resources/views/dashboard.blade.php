@@ -81,43 +81,54 @@ Projects
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const table = document.querySelector('.project');
-        const form = document.querySelector('.customer');
+        const project = document.querySelector('.project');
+        const customer = document.querySelector('.customer');
+        const supplier = document.querySelector('.supplier');
         const button = document.getElementById('toggle-btn');
-        form.style.display = 'none';
-        table.style.display = 'block';
-        button.textContent = 'Go to Add Customer';
+        project.style.display = 'block';
+        customer.style.display = 'none';
+        supplier.style.display = 'none';
     })
-    count = 0
-    function toggleView() {
-    const table = document.querySelector('.project');
-    const form = document.querySelector('.customer');
-    const button = document.getElementById('toggle-btn'); // use an ID for the button
 
-    
-    
-    if (count == 0) {
-        form.style.display = 'block';
-        table.style.display = 'none';
-        button.textContent = 'Go to Add New Project';
-        count = count + 1;
-        console.log(count)
-    } else {
-        form.style.display = 'none';
-        table.style.display = 'block';
-        button.textContent = 'Go to Add Customer';
-        count = count - 1;
-        console.log(count)
+    function project() {
+        const project = document.querySelector('.project');
+        const customer = document.querySelector('.customer');
+        const supplier = document.querySelector('.supplier');
+
+        project.style.display = 'block';
+        customer.style.display = 'none';
+        supplier.style.display = 'none';
     }
-}
 
+    function customer() {
+        const project = document.querySelector('.project');
+        const customer = document.querySelector('.customer');
+        const supplier = document.querySelector('.supplier');
+
+        project.style.display = 'none';
+        customer.style.display = 'block';
+        supplier.style.display = 'none';
+    }
+
+    function supplier() {
+        const project = document.querySelector('.project');
+        const customer = document.querySelector('.customer');
+        const supplier = document.querySelector('.supplier');
+
+        project.style.display = 'none';
+        customer.style.display = 'none';
+        supplier.style.display = 'block';
+    }
 </script>
+
 <center>
-    <div class="form-selectin">
-        <button id="toggle-btn" class="btn btn-primary" onclick="toggleView()">Add New Project</button>
+    <div class="form-selectin mb-2">
+        <button id="toggle-btn" class="btn btn-primary" onclick="project()">Add New Project</button>
+        <button id="toggle-btn" class="btn btn-primary" onclick="customer()">Add New Customer</button>
+        <button id="toggle-btn" class="btn btn-primary" onclick="supplier()">Add New Supplier</button>
     </div>
     
-    <div class="project">
+    <div class="project mt-5">
         <div class="form-section">
             <form action="{{ route('new.project') }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -148,36 +159,70 @@ Projects
         </div>
     </div>
     
-    <div class="customer">
-    <h1>Add Customer</h1>
+    <div class="customer mt-5">
+        <h1>Add Customer</h1>
 
-    <center>
-        <div class="form-section row">
-            <form action="{{ route('new.customer') }}" method="POST" enctype="multipart/form-data" class="col-6 mx-auto">
-                @csrf
-                <div class="mb-3">
-                    <input type="text" name="name" class="form-control" placeholder="Customer's Name">
-                </div>
-                <div class="mb-3">
-                    <input type="email" name="email" class="form-control" placeholder="Email">
-                </div>
-                <div class="mb-3">
-                    <input type="text" name="address" class="form-control" placeholder="Address">
-                </div>
-                <div class="mb-3">
-                    <input type="text" name="contact" class="form-control" placeholder="Contact">
-                </div>
-                <div class="mb-3">
-                    <input type="text" name="tin" class="form-control" placeholder="TIN">
-                </div>
-                <div class="mb-3">
-                    <input type="text" name="vrn" class="form-control" placeholder="VRN">
-                </div>
-                <button type="submit" class="btn btn-primary">Register</button>
-            </form>
-        </div>
-    </center>
-</div>
+        <center>
+            <div class="form-section row">
+                <form action="{{ route('new.customer') }}" method="POST" enctype="multipart/form-data" class="col-6 mx-auto">
+                    @csrf
+                    <div class="mb-3">
+                        <input type="text" name="name" class="form-control" placeholder="Customer's Name">
+                    </div>
+                    <div class="mb-3">
+                        <input type="email" name="email" class="form-control" placeholder="Email">
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" name="address" class="form-control" placeholder="Address">
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" name="contact" class="form-control" placeholder="Contact">
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" name="tin" class="form-control" placeholder="TIN">
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" name="vrn" class="form-control" placeholder="VRN">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </form>
+            </div>
+        </center>
+    </div>
+
+    <div class="supplier mt-5">
+        <h1>Add Supplier</h1>
+
+        <center>
+            <div class="form-section row">
+                <form action="{{ route('new.supplier') }}" method="POST" enctype="multipart/form-data" class="col-6 mx-auto">
+                    @csrf
+                    <div class="mb-3">
+                        <input type="text" name="name" class="form-control" placeholder="Customer's Name">
+                    </div>
+                    <div class="mb-3">
+                        <input type="email" name="email" class="form-control" placeholder="Email">
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" name="address" class="form-control" placeholder="Address">
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" name="contact" class="form-control" placeholder="Contact">
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" name="tin" class="form-control" placeholder="TIN">
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" name="vrn" class="form-control" placeholder="VRN">
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" name="category" class="form-control" placeholder="Category">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </form>
+            </div>
+        </center>
+    </div>
 
 </center>
 

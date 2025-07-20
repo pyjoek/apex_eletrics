@@ -88,26 +88,54 @@ Add Item to Project
         </form>
     </div>
     
-    <div class="form-section">
-        <form action="{{ route('new.invoice') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <select name="project">
-                @foreach ($project as $proj)
-                <option value="{{$proj->project}}">{{$proj->project}}</option>
-                @endforeach
-            </select>
-            <select name="customer">
-                @foreach ($customer as $cust)
-                <option value="{{$cust->name}}">{{$cust->name}}</option>
-                @endforeach
-            </select>
-            <input type="text" name="item" placeholder="Item Name">
-            <input type="text" name="unit" placeholder="Unit">
-            <input type="number" name="quantity" placeholder="Quantity">
-            <input type="number" name="price" placeholder="Price">
-            <button type="submit">Insert</button>
-        </form>
-    </div>
+    <div class="invoice-form mt-5">
+    <h1>Add Invoice Item</h1>
+
+    <center>
+        <div class="form-section row">
+            <form action="{{ route('new.invoice') }}" method="POST" enctype="multipart/form-data" class="col-6 mx-auto">
+                @csrf
+
+                <div class="mb-3">
+                    <select name="project" class="form-select">
+                        @foreach ($project as $proj)
+                            <option value="{{ $proj->project }}">{{ $proj->project }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <select name="customer" class="form-select">
+                        @foreach ($customer as $cust)
+                            <option value="{{ $cust->name }}">{{ $cust->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <input type="text" name="item" class="form-control" placeholder="Item Name">
+                </div>
+
+                <div class="mb-3">
+                    <input type="text" name="unit" class="form-control" placeholder="Unit">
+                </div>
+
+                <div class="mb-3">
+                    <input type="number" name="quantity" class="form-control" placeholder="Quantity">
+                </div>
+
+                <div class="mb-3">
+                    <input type="number" name="price" class="form-control" placeholder="Price">
+                </div>
+
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-success">Insert</button>
+                </div>
+            </form>
+        </div>
+    </center>
+</div>
+
     
     <!-- <div class="table-section">
         <table>
