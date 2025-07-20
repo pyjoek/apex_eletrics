@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
@@ -49,6 +50,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/expense', [ExpenseController::class, 'index']);
     Route::post('/expense', [ExpenseController::class, 'store'])->name('new.expense');
+
+    Route::get('/purchaseOrder', [SupplierController::class, 'index']);
     
     Route::get('/pdff', [ProjectController::class, 'display']);
 

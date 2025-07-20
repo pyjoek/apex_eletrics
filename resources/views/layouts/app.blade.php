@@ -32,13 +32,13 @@
         <div class="row">
 
             <!-- Left Side Nav Column -->
-            <aside class="col-md-3 col-lg-1 bg-light border-end p-4 min-vh-100">
+            <aside class="col-md-3 col-lg-1 bg-light border-end p-2 min-vh-100">
                 <ul class="nav flex-column">
                     <li class="nav-item"><a class="nav-link" href="{{ route('profile.show')}}">Profile</a></li>
                     <li class="nav-item"><a class="nav-link" href="/projects">Projects</a></li>
                     <li class="nav-item"><a class="nav-link" href="/invoice">Add Items</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/purchaseOrder">Add Exense</a></li>
                     <li class="nav-item"><a class="nav-link" href="/expense">Expense</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Other</a></li>
                     <form action="{{ route('logout') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <button type="submit" class="btn btn-warning mt-4">Log out</button>
