@@ -143,7 +143,7 @@ Projects
                 <table>
                     <thead>
                         <tr>
-                            <th colspan="2"><center>Project Name</center></th>
+                            <th colspan="3"><center>Project Name</center></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -151,6 +151,7 @@ Projects
                         <tr>
                             <td>{{ $project->project }}</td>
                             <td><a href="/projects/{{ $project->id }}"><center><button class="btn btn-secondary">Invoice</button></center></a></td>
+                            <td><a href="/expense/{{ $project->id }}"><center><button class="btn btn-secondary">Expense</button></center></a></td>
                         </tr>
                         @endforeach
                     </tbody>

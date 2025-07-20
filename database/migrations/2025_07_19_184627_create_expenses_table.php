@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('project_id')->constrained()->onDelete('cascade');
             $table->string('item');
-            $table->smallInteger('amount');
+            $table->string('unit');
+            $table->integer('quantity');
+            $table->integer('price');
             $table->timestamps();
         });
     }

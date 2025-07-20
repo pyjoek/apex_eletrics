@@ -14,8 +14,18 @@ class SupplierController extends Controller
         return view('expense.expense', compact(['supl', 'project']));
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        
+        $sup = Supplier::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'address' => $request->address,
+            'contact' => $request->contact,
+            'tin' => $request->tin,
+            'vrn' => $request->vrn,
+            'category' => $request->category
+        ]);
+
+        return redirect()->back();
     }
 }

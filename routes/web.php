@@ -47,13 +47,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/invoices/export/pdf/{id}', [InvoiceController::class, 'exportPDF'])->name('invoices.export.pdf');
     Route::get('/profoma/export/pdf/{id}', [InvoiceController::class, 'profomaPDF'])->name('profoma.export.pdf');
     Route::get('/delivery/export/pdf/{id}', [InvoiceController::class, 'delivery'])->name('delivery.export.pdf');
-
-    // Route::get('/expense', [ExpenseController::class, 'index']);
-    // Route::post('/expense', [ExpenseController::class, 'store'])->name('new.expense');
-
-    Route::get('/expense', [SupplierController::class, 'index']);
     
-    Route::get('/pdff', [ProjectController::class, 'display']);
+    Route::get('/expense', [ExpenseController::class, 'index']);
+    Route::post('/expense', [ExpenseController::class, 'store'])->name('new.expense');
+    Route::get('/expense/{id}', [ExpenseController::class, 'show'])->name('expense');
 
     Route::post('/customer', [CustomerCOntroller::class, 'store'])->name('new.customer');
     Route::post('/suplier', [SupplierCOntroller::class, 'store'])->name('new.supplier');

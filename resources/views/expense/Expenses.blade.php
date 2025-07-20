@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('header')
-Add Expense to Project
+Add Item to Project
 @endsection
 
 @section('content')
@@ -88,47 +88,31 @@ Add Expense to Project
         </form>
     </div>
     
-    <div class="invoice-form mt-5">
-    <h1>Add Expense Item</h1>
-
-    <center>
-        <div class="form-section row">
-            <form action="{{ route('new.expense') }}" method="POST" enctype="multipart/form-data" class="col-6 mx-auto">
-                @csrf
-
-                <div class="mb-3">
-                    <select name="project" class="form-select">
-                        @foreach ($project as $proj)
-                            <option value="{{ $proj->project }}">{{ $proj->project }}</option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <div class="mb-3">
-                    <input type="text" name="item" class="form-control" placeholder="Item Name">
-                </div>
-
-                <div class="mb-3">
-                    <input type="text" name="unit" class="form-control" placeholder="Unit">
-                </div>
-
-                <div class="mb-3">
-                    <input type="number" name="quantity" class="form-control" placeholder="Quantity">
-                </div>
-
-                <div class="mb-3">
-                    <input type="number" name="price" class="form-control" placeholder="Price">
-                </div>
-
-                <div class="mb-3">
-                    <button type="submit" class="btn btn-success">Insert</button>
-                </div>
-            </form>
-        </div>
-    </center>
-</div>
-
-    
+    <div class="table-section">
+        <table>
+            <thead>
+                <tr>
+                    <th>Item Name</th>
+                    <th>Unit</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                @foreach($expense as $invoice)
+                <tr>
+                    <td>{{ $invoice->item }}</td>
+                    <td>{{ $invoice->unit }}</td>
+                    <td>{{ $invoice->quantity }}</td>
+                    <td>{{ $invoice->price }}</td>
+                    <td>{{ $invoice->quantity * $invoice->price }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 </center>
 
 @endsection

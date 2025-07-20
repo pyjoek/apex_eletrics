@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Expense;
 use App\Models\Project;
+use App\Models\Invoice;
 use Illuminate\Http\Request;
 
 class ExpenseController extends Controller
@@ -21,9 +22,24 @@ class ExpenseController extends Controller
         $expense = Expense::create([
             'project_id' => $project->id,
             'item' => $request->item,
-            'amount' => $request->amount
+            'unit' => $request->unit,
+            'price' => $request->price,
+            'quantity' => $request->quantity
         ]);
 
         return redirect()->back();
+    }
+
+    public function show(Request $request, $id)
+    {
+        $projects = Project::findOrFail($id)->project;
+        $expense = Expense::where('project_id', $id)->get();
+        $invoices = Invoice::where('project_id', $id)->get();
+
+        return view('expense.Expenses')->with([
+            'projects' => $projects,
+            'invoices' => $invoices,
+            'expense' => $expense
+        ]);
     }
 }

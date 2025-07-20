@@ -64,10 +64,4 @@ class ProjectController extends Controller
         $pdf = Pdf::loadView('invoice.pdf', compact('projects'));
         return $pdf->download('projects.pdf');
     }
-
-    public function display()
-    {
-        $projects = Project::all();
-        return view('invoice.pdf', compact('projects'));
-    }
 }
