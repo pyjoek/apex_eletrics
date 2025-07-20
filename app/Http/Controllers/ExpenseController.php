@@ -16,8 +16,10 @@ class ExpenseController extends Controller
 
     public function store(Request $request)
     {
+        $project = Project::where('project', $request->project)->first();
+
         $expense = Expense::create([
-            'project_id' => $request->project,
+            'project_id' => $project->id,
             'item' => $request->item,
             'amount' => $request->amount
         ]);

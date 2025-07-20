@@ -5,7 +5,7 @@ Expenses
 @endsection
 
 @section('content')
-<center>
+    <center>
     <div class="form-section">
         <form action="{{ route('new.expense') }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -15,7 +15,7 @@ Expenses
                 @endforeach
             </select>
             <input type="text" name="item" placeholder="Item Name">
-            <input type="number" name="price" placeholder="Price">
+            <input type="number" name="amount" placeholder="Amount">
             <button type="submit">Insert</button>
         </form>
     </div>
@@ -27,7 +27,9 @@ Expenses
             <th>Amount</th>
             @foreach ($expense as $index => $expen)
                 <tr>
-                    <td>{{$expen}}</td>
+                    <td>{{$expen->project->project}}</td>
+                    <td>{{$expen->item}}</td>
+                    <td>{{$expen->amount}}</td>
                 </tr>
             @endforeach
         </table>
