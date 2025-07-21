@@ -36,7 +36,7 @@
                 <ul class="nav flex-column">
                     <li class="nav-item"><a class="nav-link" href="{{ route('profile.show')}}">Profile</a></li>
                     <li class="nav-item"><a class="nav-link" href="/projects">Projects</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/purchase">Purchase Order</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/purchase">Order Item</a></li>
                     <li class="nav-item"><a class="nav-link" href="/invoice">Add Items</a></li>
                     <li class="nav-item"><a class="nav-link" href="/expense">Add Expense</a></li>
                     <form action="{{ route('logout') }}" method="POST" enctype="multipart/form-data">
@@ -47,7 +47,7 @@
             </aside>
 
             <!-- Right Side Content Column -->
-            <main class="col-md-9 col-lg-9 p-5">
+            <main class="col-md-9 col-lg-10 p-5">
                 @yield('content')
             </main>
 

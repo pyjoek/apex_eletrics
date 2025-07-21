@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Models\Invoice;
+use App\Models\Supplier;
+use App\Models\Customer;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ProjectsExport;
 use App\Imports\ProjectsImport;
@@ -15,7 +17,9 @@ class ProjectController extends Controller
      public function index()
     {
         $projects = Project::all();
-        return view('dashboard')->with(['projects' => $projects]);
+        $supplier = Supplier::all();
+        $customer = Customer::all();
+        return view('dashboard')->with(['projects' => $projects, 'supplier' => $supplier, 'customer' => $customer]);
     }
 
     public function show(Request $request, $id)

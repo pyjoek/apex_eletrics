@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('header')
-Purchase Order
+Order Item
 @endsection
 
 @section('content')
@@ -88,21 +88,45 @@ Purchase Order
         </form>
     </div>
     
-    <div class="form-section">
-        <form action="{{ route('new.invoice') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <select name="project">
-                @foreach ($supplier as $proj)
-                <option value="{{$proj->name}}">{{$proj->name}}</option>
-                @endforeach
-            </select>
-            <input type="text" name="item" placeholder="Item Name">
-            <input type="text" name="unit" placeholder="Unit">
-            <input type="number" name="quantity" placeholder="Quantity">
-            <input type="number" name="price" placeholder="Price">
-            <button type="submit">Insert</button>
-        </form>
-    </div>
+    <div class="invoice-form mt-5">
+
+    <center>
+        <div class="form-section row">
+            <form action="{{ route('new.purchase') }}" method="POST" enctype="multipart/form-data" class="col-6 mx-auto">
+                @csrf
+
+                <div class="mb-3">
+                    <select name="supplier" class="form-select">
+                        @foreach ($supplier as $proj)
+                            <option value="{{ $proj->id }}">{{ $proj->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <input type="text" name="item" class="form-control" placeholder="Item Name">
+                </div>
+
+                <div class="mb-3">
+                    <input type="text" name="unit" class="form-control" placeholder="Unit">
+                </div>
+
+                <div class="mb-3">
+                    <input type="number" name="quantity" class="form-control" placeholder="Quantity">
+                </div>
+
+                <div class="mb-3">
+                    <input type="number" name="price" class="form-control" placeholder="Price">
+                </div>
+
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Insert</button>
+                </div>
+            </form>
+        </div>
+    </center>
+</div>
+
     
 </center>
 

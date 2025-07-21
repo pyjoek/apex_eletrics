@@ -16,8 +16,10 @@ class PurchaseController extends Controller
 
     public function store(Request $request)
     {
+        $sup = Supplier::where('id', $request->supplier)->first();
+
         $purchase = Purchase::create([
-            'supplier_id' => $supplier,
+            'supplier_id' => $request->supplier,
             'item' => $request->item,
             'unit' => $request->unit,
             'quantity' => $request->quantity,

@@ -189,6 +189,17 @@ Projects
                 </form>
             </div>
         </center>
+        
+        <div class="row">
+            @foreach ($customer as $index => $supply)
+                <div class="col-md-4 mb-3">
+                    <a href="#" class="btn btn-primary w-100">
+                        {{ $supply->name }}
+                    </a>
+                </div>
+            @endforeach
+        </div>
+
     </div>
 
     <div class="supplier mt-5">
@@ -223,6 +234,16 @@ Projects
                 </form>
             </div>
         </center>
+
+        <div class="row">
+            @foreach ($supplier as $index => $supply)
+                <div class="col-md-4 mb-3">
+                    <a href="#" class="btn btn-primary w-100">
+                        {{ $supply->name }}
+                    </a>
+                </div>
+            @endforeach
+        </div>
     </div>
 
 </center>
