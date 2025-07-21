@@ -92,8 +92,8 @@ Purchase Order
         <form action="{{ route('new.invoice') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <select name="project">
-                @foreach ($project as $proj)
-                <option value="{{$proj->project}}">{{$proj->project}}</option>
+                @foreach ($supplier as $proj)
+                <option value="{{$proj->name}}">{{$proj->name}}</option>
                 @endforeach
             </select>
             <input type="text" name="item" placeholder="Item Name">

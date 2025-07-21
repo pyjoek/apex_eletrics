@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Purchase;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 
 class PurchaseController extends Controller
@@ -9,7 +10,8 @@ class PurchaseController extends Controller
     public function index()
     {
         $purchase = Purchase::all();
-        return view('purchase.purchase', compact('purchase'));
+        $supplier = Supplier::all();
+        return view('purchase.purchase', compact(['purchase', 'supplier']));
     }
 
     public function store(Request $request)

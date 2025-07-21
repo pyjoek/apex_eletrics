@@ -4,6 +4,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
@@ -22,10 +23,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profiles', [ProfileController::class, 'show'])->name('profile.show');
@@ -55,7 +52,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/customer', [CustomerCOntroller::class, 'store'])->name('new.customer');
     Route::post('/suplier', [SupplierCOntroller::class, 'store'])->name('new.supplier');
 
-
+    Route::get('/purchase', [PurchaseController::class, 'index']);
 });
 
 require __DIR__.'/auth.php';
