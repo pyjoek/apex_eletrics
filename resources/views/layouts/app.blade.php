@@ -36,6 +36,7 @@
                 <ul class="nav flex-column">
                     <li class="nav-item"><a class="nav-link" href="{{ route('profile.show')}}">Profile</a></li>
                     <li class="nav-item"><a class="nav-link" href="/projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('show.purchase')}}">Purchase Order</a></li>
                     <li class="nav-item"><a class="nav-link" href="/purchase">Order Item</a></li>
                     <li class="nav-item"><a class="nav-link" href="/invoice">Add Items</a></li>
                     <li class="nav-item"><a class="nav-link" href="/expense">Add Expense</a></li>

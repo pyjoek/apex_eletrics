@@ -14,6 +14,18 @@ class PurchaseController extends Controller
         return view('purchase.purchase', compact(['purchase', 'supplier']));
     }
 
+    public function show()
+    {
+        $supplier = Supplier::all();
+        return view('purchase.Purchase', compact(['supplier']));
+    }
+
+    public function all($id)
+    {
+        $supp = Purchase::where('supplier_id', $id)->get();
+        return view('purchase.order', compact(['supp', 'id']));
+    }
+
     public function store(Request $request)
     {
         $sup = Supplier::where('id', $request->supplier)->first();

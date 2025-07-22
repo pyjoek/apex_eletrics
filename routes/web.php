@@ -53,6 +53,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/suplier', [SupplierCOntroller::class, 'store'])->name('new.supplier');
 
     Route::get('/purchase', [PurchaseController::class, 'index']);
+    Route::get('/purchases', [PurchaseController::class, 'show'])->name('show.purchase');
+    Route::get('/purchases/{id}', [PurchaseController::class, 'all'])->name('purchase');
     Route::post('/purchase', [PurchaseController::class, 'store'])->name('new.purchase');
 });
 
