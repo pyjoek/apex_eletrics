@@ -48,7 +48,7 @@
             </aside>
 
             <!-- Right Side Content Column -->
-            <main class="col-md-9 col-lg-10 p-5">
+            <main class="col-md-9 col-lg-11 p-5">
                 @yield('content')
             </main>
 
