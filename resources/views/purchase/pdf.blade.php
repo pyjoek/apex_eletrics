@@ -133,12 +133,12 @@
         <!-- Make this column 60% -->
         <td style="border: 1px solid white; width: 70%; vertical-align: top;">
             <h3>BILL TO:</h3>
-            Name: {{$invoices->first()->customer->name}}<br>
-            Email: {{$invoices->first()->customer->email}}<br>
-            Address: {{$invoices->first()->customer->address}}<br>
-            Contact: {{$invoices->first()->customer->contact}}<br>
-            TIN No.: {{$invoices->first()->customer->tin}}<br>
-            VRN No.: {{$invoices->first()->customer->vrn}}<br>
+            Name: {{$invoices->first()->supplier->name}}<br>
+            Email: {{$invoices->first()->supplier->email}}<br>
+            Address: {{$invoices->first()->supplier->address}}<br>
+            Contact: {{$invoices->first()->supplier->contact}}<br>
+            TIN No.: {{$invoices->first()->supplier->tin}}<br>
+            VRN No.: {{$invoices->first()->supplier->vrn}}<br>
         </td>
         <!-- Make this column 40% -->
         <td style="border: 1px solid white; text-align: right; width: 30%; vertical-align: top;">
@@ -163,14 +163,6 @@
         <tbody>
             @php
                 $total = $invoices->sum(fn($inv) => $inv->price * $inv->quantity);
-                $tax = $total * ($data['tax'] / 100);
-                $discount = $total * ($data['discount'] / 100);
-                $newTotal = $total + $tax - $discount;
-
-                $stampBase64 = 'data:image/png;base64,' . base64_encode(
-                    file_get_contents(public_path('img/stamp.png'))
-                );
-
             @endphp
             @foreach($invoices as $index => $invoice)
             <tr>
@@ -186,18 +178,6 @@
                 <td colspan="5">Total</td>
                 <td>{{number_format($total, 0)}}</td>
             </tr>
-            <tr>
-                <td colspan="5">VAT TAX {{$data['tax']}}%</td>
-                <td>{{number_format($tax, 0)}}</td>
-            </tr>
-            <tr>
-                <td colspan="5">Discount {{$data['discount']}}%</td>
-                <td>{{number_format($discount, 0)}}</td>
-            </tr>
-            <tr>
-                <td colspan="5">Gross Total</td>
-                <td>{{number_format($newTotal, 0)}}</td>
-            </tr>
         </tbody>
     </table>
 </div>
@@ -210,10 +190,6 @@
                 <li>{{ $term }}</li>
             @endforeach 
         </ul>
-    </div>
-
-    <div class="terms-image">
-        <img src="{{ public_path('img/stamp.png') }}" alt="Company stamp">
     </div>
 </div>
 

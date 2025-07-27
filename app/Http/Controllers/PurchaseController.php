@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 use App\Models\Purchase;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class PurchaseController extends Controller
 {
@@ -39,5 +42,34 @@ class PurchaseController extends Controller
         ]);
 
         return redirect()->back();
+    }
+
+    public function purchaseexportPdf(Request $request, $id)
+    {
+        $project  = Supplier::findOrFail($id);
+        // $invoices = Invoice::where('project_id', $id)->get();
+        $invoices = Purchase::with('supplier')->where('supplier_id', $id)->get();
+
+        // dd($invoices->first()->customer->name);
+
+        $termsInput = $request->input('terms');
+
+        // Split each line into array items
+        $terms = preg_split('/\r\n|\r|\n/', $termsInput);
+
+        // Remove empty lines (optional)
+        $terms = array_filter(array_map('trim', $terms));
+
+        $data = [
+            'title'    => $request->input('title'),
+            'terms'    => $terms
+        ];
+
+        $total = $invoices->sum(fn($inv) => $inv->price * $inv->quantity);
+        // return view('purchase.pdf', compact('project', 'invoices', 'total', 'data'));
+
+        $pdf = Pdf::loadView('purchase.pdf', compact('project', 'invoices', 'total', 'data'));
+
+        return $pdf->download('purchase.pdf');
     }
 }

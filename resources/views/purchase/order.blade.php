@@ -84,26 +84,18 @@ Purchase Order
         <form id="export-form" method="GET" target="_blank">
             {{-- Export Links --}}
             <div class="export-links" style="margin-top: 15px;">
-                <button type="submit" class="export-btn" formaction="{{ route('invoices.export.excel', $id) }}">
+                <button type="submit" class="export-btn" formaction="{{ route('purchase.export.excel', $id) }}">
                     Export to Excel
                 </button>
-                <button type="submit" class="export-btn" formaction="{{ route('invoices.export.pdf', $id) }}">
-                    Export Invoice to PDF
-                </button>
-                <button type="submit" class="export-btn" formaction="{{ route('profoma.export.pdf', $id) }}">
-                    Export Proforma to PDF
-                </button>
-                <button type="submit" class="export-btn" formaction="{{ route('delivery.export.pdf', $id) }}">
-                    Export Delivery to PDF
+                <button type="submit" class="export-btn" formaction="{{ route('purchase.export.pdf', $id) }}">
+                    Export Purchase Order to PDF
                 </button>
             </div>
     
             {{-- Shared Invoice Data --}}
             <div style="margin-top: 20px; row">
                 <p>
-                    <input class="col-5" type="text" name="title" placeholder="The Invoice title">
-                    <input class="col-2" type="number" name="tax" placeholder="VAT tax">
-                    <input class="col-2" type="number" name="discount" placeholder="Discount Percent">
+                    <input class="col-5" type="text" name="title" placeholder="The Purchase Order title">
                 </p>
                 <textarea class="col-9" name="terms" placeholder="- Payment in 30 days&#10;- No refunds&#10;- 1 year warranty"></textarea>
     
