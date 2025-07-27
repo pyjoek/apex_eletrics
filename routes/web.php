@@ -56,8 +56,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/purchases', [PurchaseController::class, 'show'])->name('show.purchase');
     Route::get('/purchases/{id}', [PurchaseController::class, 'all'])->name('purchase');
     Route::post('/purchase', [PurchaseController::class, 'store'])->name('new.purchase');
-    Route::get('/purchase/export/excel/{id}', [PurchaseController::class, 'purchaseexportExcel'])->name('purchase.export.excel');
-    Route::get('/purchase/export/pdf/{id}', [PurchaseController::class, 'purchaseexportPDF'])->name('purchase.export.pdf');
+    Route::get('/purchase/export/excel/{id}', [PurchaseController::class, 'exportExcel'])->name('purchase.export.excel');
+    Route::get('/purchase/export/pdf/{id}', [PurchaseController::class, 'exportPDF'])->name('purchase.export.pdf');
 });
 
 require __DIR__.'/auth.php';

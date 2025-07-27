@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\Purchase;
 use App\Models\Supplier;
+use App\Exports\PurchaseExport;
+use App\Imports\InvoicesImport;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
@@ -44,7 +46,7 @@ class PurchaseController extends Controller
         return redirect()->back();
     }
 
-    public function purchaseexportPdf(Request $request, $id)
+    public function exportPdf(Request $request, $id)
     {
         $project  = Supplier::findOrFail($id);
         // $invoices = Invoice::where('project_id', $id)->get();
@@ -71,5 +73,10 @@ class PurchaseController extends Controller
         $pdf = Pdf::loadView('purchase.pdf', compact('project', 'invoices', 'total', 'data'));
 
         return $pdf->download('purchase.pdf');
+    }
+
+    public function exportExcel($id)
+    {
+        return Excel::download(new PurchaseExport($id), 'invoices.xlsx');
     }
 }
