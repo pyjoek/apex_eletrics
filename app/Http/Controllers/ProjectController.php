@@ -5,6 +5,7 @@ use App\Models\Project;
 use App\Models\Invoice;
 use App\Models\Supplier;
 use App\Models\Customer;
+use App\Models\HistInvoice;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ProjectsExport;
 use App\Imports\ProjectsImport;
@@ -25,6 +26,20 @@ class ProjectController extends Controller
     public function show(Request $request, $id)
     {
         $projects = Project::findOrFail($id);
+        $hist = HistInvoice::where('project_id', $id)->get();
+        $invoices = Invoice::where('project_id', $projects->id)->get();
+
+        return view('work')->with([
+            'projects' => $projects,
+            'invoices' => $invoices,
+            'id' => $id,
+            'hist' => $hist
+        ]);
+    }
+
+    public function oldInvoice(Request $request)
+    {
+        $projects = Project::findOrFail($request->id);
         $invoices = Invoice::where('project_id', $projects->id)->get();
 
         return view('work')->with([

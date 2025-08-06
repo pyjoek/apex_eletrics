@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Models\Invoice;
 use App\Models\Customer;
+use App\Models\HistInvoice;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\InvoicesExport;
 use App\Imports\InvoicesImport;
@@ -54,6 +55,14 @@ class InvoiceController extends Controller
 
     public function exportPdf(Request $request, $id)
     {
+        $history = HistInvoice::create([
+            'project_id' => $request->id,
+            'title' => $request->title,
+            'tax' => $request->tax,
+            'discount' => $request->discount,
+            'terms' => $request->terms,
+        ]);
+
         $project  = Project::findOrFail($id);
         // $invoices = Invoice::where('project_id', $id)->get();
         $invoices = Invoice::with('customer')->where('project_id', $id)->get();

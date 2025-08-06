@@ -19,5 +19,10 @@ class Project extends Model
         return $this->hasMany(Expense::class);
     }
 
+    public function histinvoice()
+    {
+        return $this->hasMany(HistInvoice::class);
+    }
+
     use HasFactory;
 }

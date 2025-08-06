@@ -158,9 +158,9 @@
             </thead>
             
             <tbody>
-                @foreach ($hist as $invoice)
+                @foreach ($invoices as $invoice)
                     <tr>
-                        <td>{{$invoice}}</td>
+                        <td></td>
                         <td></td>
                         <td><a href=""><center><button class="btn btn-secondary">Open</button></center></a></td>
                         <td><a href=""><center><button class="btn btn-danger">Delete</button></center></a></td>

@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('projects', function (Blueprint $table) {
+        Schema::create('hist_invoices', function (Blueprint $table) {
             $table->id();
-            $table->string('project')->unique();
+            $table->foreignId('project_id')->constrained()->onDelete('cascade');
+            $table->string('title');
+            $table->integer('tax');
+            $table->integer('discount');
+            $table->string('terms');
             $table->timestamps();
         });
     }
@@ -23,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('projects');
+        Schema::dropIfExists('hist_invoices');
     }
 };
