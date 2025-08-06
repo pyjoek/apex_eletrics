@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('header')
-{{ $expense->first()->project->project }} Expenses Page
+{{ $expense->first()?->project?->project ?? '' }} Expenses Page
 @endsection
 
 @section('content')
@@ -116,12 +116,12 @@
                 @endforeach
                 <tr>
                     <td colspan="3"></td>
-                    <td>Invoice</td>
+                    <td><b>Invoice</b></td>
                     <td>{{number_format($total, 0)}}</td>
                 </tr>
                 <tr>
                     <td colspan="3"></td>
-                    <td>Remaining</td>
+                    <td><b>Remaining</b></td>
                     <td>{{number_format($total - $expen)}}</td>
                 </tr>
             </tbody>

@@ -115,7 +115,7 @@ class InvoiceController extends Controller
         $total = $invoices->sum(fn($inv) => $inv->price * $inv->quantity);
 
         $pdf = Pdf::loadView('invoice.proforma', compact('project', 'invoices', 'total', 'data'));
-        // return view('invoice.pdf', compact('project', 'invoices', 'total', 'data'));
+        // return view('invoice.proforma', compact('project', 'invoices', 'total', 'data'));
 
         return $pdf->download('proforma.pdf');
         // return $pdf->stream('proforma.pdf');
@@ -144,6 +144,8 @@ class InvoiceController extends Controller
         $total = $invoices->sum(fn($inv) => $inv->price * $inv->quantity);
 
         $pdf = Pdf::loadView('invoice.delivery', compact('project', 'invoices', 'total', 'data'));
+        return view('invoice.delivery', compact('project', 'invoices', 'total', 'data'));
+
         return $pdf->download('delivery_note.pdf');
     }
 }

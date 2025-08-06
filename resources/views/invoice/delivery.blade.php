@@ -185,28 +185,7 @@
 </div>
 
 <div class="clearfix">
-    <div class="terms-text">
-        <h3>Terms and Conditions</h3>
-        <ul>
-            @foreach ($data['terms'] as $term)
-                <li>{{ $term }}</li>
-            @endforeach 
-        </ul>
-    </div>
-
-    <div class="terms-image">
-        <img src="{{ public_path('img/stamp.png') }}" alt="Company stamp">
-    </div>
-</div>
-
-<div>
-    BANK DETAILS<br>
-    ACCOUNT NAME: APEX ELECTRICS LIMITED<br>
-    ACCOUNT NUMBER: 40810136201<br>
-    BANK NAME: NMB<br>
-    BRANCH: CLOCK TOWER<br>
-    SWIFT: NMIIBTZTZ<br>
-    BRANCH CODE: 408
+    <center>coming soon</center>
 </div>
 
 </body>

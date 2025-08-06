@@ -35,6 +35,7 @@ class ExpenseController extends Controller
         $projects = Project::findOrFail($id)->project;
         $expense = Expense::where('project_id', $id)->get();
         $invoices = Invoice::where('project_id', $id)->get();
+        
 
         return view('expense.Expenses')->with([
             'projects' => $projects,

@@ -101,10 +101,10 @@
                 <p>
                     <input class="col-5" type="text" name="title" placeholder="The Invoice title" required>
                     <input type="hidden" name="id" value="{{$id}}">
-                    <input class="col-2" type="number" name="tax" placeholder="VAT tax">
+                    <input class="col-2" type="number" name="tax" placeholder="VAT tax" required>
                     <input class="col-2" type="number" name="discount" placeholder="Discount Percent">
                 </p>
-                <textarea class="col-9" name="terms" placeholder="- Payment in 30 days&#10;- No refunds&#10;- 1 year warranty"></textarea>
+                <textarea class="col-9" name="terms" placeholder="- Payment in 30 days&#10;- No refunds&#10;- 1 year warranty" required></textarea>
     
             </div>
         </form>
@@ -160,9 +160,9 @@
             <tbody>
                 @foreach ($hist as $invoice)
                     <tr>
-                        <td>{{$invoice}}</td>
-                        <td></td>
-                        <td><a href=""><center><button class="btn btn-secondary">Open</button></center></a></td>
+                        <td>{{$invoice->title}}</td>
+                        <td>{{$invoice->created_at->format('Y-m-d')}}</td>
+                        <td><a href="/old/{{$invoice->id}}"><center><button class="btn btn-secondary">Open</button></center></a></td>
                         <td><a href=""><center><button class="btn btn-danger">Delete</button></center></a></td>
                     </tr>
                 @endforeach

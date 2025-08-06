@@ -1,7 +1,7 @@
 @extends('layouts.app')
 <link rel="stylesheet" href="{{asset('css/work.css')}}">
 @section('header')
-{{ $projects->project }} Invoice Page
+{{ $projects->project }} Invoice of Date: {{$hist->created_at->format('Y-m-d')}}
 @endsection
 
 @section('content')
@@ -99,12 +99,11 @@
             {{-- Shared Invoice Data --}}
             <div style="margin-top: 20px; row">
                 <p>
-                    <input class="col-5" type="text" name="title" placeholder="The Invoice title" required>
-                    <input type="hidden" name="id" value="{{$id}}">
-                    <input class="col-2" type="number" name="tax" placeholder="VAT tax">
-                    <input class="col-2" type="number" name="discount" placeholder="Discount Percent">
+                    <input class="col-5" type="text" name="title" value="{{$hist->title}}">
+                    <input class="col-2" type="number" name="tax" value="{{$hist->tax}}">
+                    <input class="col-2" type="number" name="discount" value="{{$hist->discount}}">
                 </p>
-                <textarea class="col-9" name="terms" placeholder="- Payment in 30 days&#10;- No refunds&#10;- 1 year warranty"></textarea>
+                <textarea class="col-9" name="terms" placeholder="- Payment in 30 days&#10;- No refunds&#10;- 1 year warranty">{{$hist->terms}}</textarea>
     
             </div>
         </form>
@@ -145,30 +144,6 @@
         </table>
     </div>
     
-    <div class="table-section">
-        <h1>Invoice History</h1>
-        <hr>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Invoice name</th>
-                    <th>Date</th>
-                    <th  colspan="2" class="text-center">Actions</th>
-                </tr>
-            </thead>
-            
-            <tbody>
-                @foreach ($invoices as $invoice)
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td><a href=""><center><button class="btn btn-secondary">Open</button></center></a></td>
-                        <td><a href=""><center><button class="btn btn-danger">Delete</button></center></a></td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
 </center>
 
 @endsection

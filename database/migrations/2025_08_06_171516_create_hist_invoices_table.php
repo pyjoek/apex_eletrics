@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('project_id')->constrained()->onDelete('cascade');
             $table->string('title');
             $table->integer('tax');
-            $table->integer('discount');
+            $table->integer('discount')->nullable();
             $table->string('terms');
             $table->timestamps();
         });

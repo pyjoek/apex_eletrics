@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/invoice', [InvoiceController::class, 'index']);
     Route::post('/invoices', [InvoiceController::class, 'store'])->name('new.invoice');
     Route::post('/invoices/import', [InvoiceController::class, 'import'])->name('invoices.import');
+    Route::get('/old/{id}', [ProjectController::class, 'oldInvoice']);
     Route::get('/invoices/export/excel/{id}', [InvoiceController::class, 'exportExcel'])->name('invoices.export.excel');
     Route::get('/invoices/export/pdf/{id}', [InvoiceController::class, 'exportPDF'])->name('invoices.export.pdf');
     Route::get('/profoma/export/pdf/{id}', [InvoiceController::class, 'profomaPDF'])->name('profoma.export.pdf');

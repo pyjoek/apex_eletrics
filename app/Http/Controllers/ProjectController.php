@@ -37,14 +37,16 @@ class ProjectController extends Controller
         ]);
     }
 
-    public function oldInvoice(Request $request)
+    public function oldInvoice($id)
     {
-        $projects = Project::findOrFail($request->id);
+        $hist = HistInvoice::findOrFail($id);
+        $projects = Project::where('id', $hist->project_id)->first();
         $invoices = Invoice::where('project_id', $projects->id)->get();
 
-        return view('work')->with([
+        return view('old')->with([
             'projects' => $projects,
             'invoices' => $invoices,
+            'hist' => $hist
         ]);
     }
 
