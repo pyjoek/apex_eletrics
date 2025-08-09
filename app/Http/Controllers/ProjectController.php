@@ -50,6 +50,34 @@ class ProjectController extends Controller
         ]);
     }
 
+    public function destroy($id)
+    {
+        // Find the record or throw 404
+        $hist = HistInvoice::findOrFail($id);
+
+        // Delete the historical invoice
+        $hist->delete();
+
+        // Redirect back with a success message
+        return redirect()
+            ->back() // Adjust to your route
+            ->with('success', 'Historical invoice deleted successfully.');
+    }
+
+    public function destroys($id)
+    {
+        // Find the record or throw 404
+        $hist = Project::findOrFail($id);
+
+        // Delete the historical invoice
+        $hist->delete();
+
+        // Redirect back with a success message
+        return redirect()
+            ->back() // Adjust to your route
+            ->with('success', 'Historical invoice deleted successfully.');
+    }
+
     public function store(Request $request) {
         $project = Project::create([
             'project' => $request->project,

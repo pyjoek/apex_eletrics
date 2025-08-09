@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/project', [ProjectController::class, 'store'])->name('new.project');
     Route::get('/projects', [ProjectController::class, 'index'])->middleware(['auth', 'verified']);
     Route::get('/projects/{id}', [ProjectController::class, 'show'])->name('work');
+    Route::get('/projects/delete/{id}', [ProjectController::class, 'destroys']);
     Route::post('/projects/import', [ProjectController::class, 'import'])->name('projects.import');
     Route::get('/projects/export/excel', [ProjectController::class, 'exportExcel'])->name('projects.export.excel');
     Route::get('/projects/export/pdf', [ProjectController::class, 'exportPDF'])->name('projects.export.pdf');
@@ -41,6 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/invoices', [InvoiceController::class, 'store'])->name('new.invoice');
     Route::post('/invoices/import', [InvoiceController::class, 'import'])->name('invoices.import');
     Route::get('/old/{id}', [ProjectController::class, 'oldInvoice']);
+    Route::get('/old/delete/{id}', [ProjectController::class, 'destroy']);
     Route::get('/invoices/export/excel/{id}', [InvoiceController::class, 'exportExcel'])->name('invoices.export.excel');
     Route::get('/invoices/export/pdf/{id}', [InvoiceController::class, 'exportPDF'])->name('invoices.export.pdf');
     Route::get('/profoma/export/pdf/{id}', [InvoiceController::class, 'profomaPDF'])->name('profoma.export.pdf');

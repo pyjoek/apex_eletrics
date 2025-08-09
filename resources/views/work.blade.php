@@ -5,6 +5,12 @@
 @endsection
 
 @section('content')
+@if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
 
 <style>
     .form-section, .table-section {
@@ -163,7 +169,7 @@
                         <td>{{$invoice->title}}</td>
                         <td>{{$invoice->created_at->format('Y-m-d')}}</td>
                         <td><a href="/old/{{$invoice->id}}"><center><button class="btn btn-secondary">Open</button></center></a></td>
-                        <td><a href=""><center><button class="btn btn-danger">Delete</button></center></a></td>
+                        <td><a href="/old/delete/{{$invoice->id}}"><center><button class="btn btn-danger">Delete</button></center></a></td>
                     </tr>
                 @endforeach
             </tbody>
