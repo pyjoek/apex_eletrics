@@ -9,6 +9,7 @@ use App\Models\HistInvoice;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ProjectsExport;
 use App\Imports\ProjectsImport;
+use App\Imports\PurchaseImport;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 use Illuminate\Http\Request;
@@ -100,6 +101,15 @@ class ProjectController extends Controller
         Excel::import(new projectsImport, $request->file('file'));
 
         return back()->with('success', 'projects imported successfully.');
+    }
+
+    public function imports(Request $request)
+    {
+        $request->validate(['file' => 'required|mimes:xlsx,xls']);
+        
+        Excel::import(new PurchaseImport, $request->file('file'));
+
+        return back()->with('success', 'orders imported successfully.');
     }
 
     public function exportExcel()

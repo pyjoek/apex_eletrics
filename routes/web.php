@@ -35,6 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/projects/{id}', [ProjectController::class, 'show'])->name('work');
     Route::get('/projects/delete/{id}', [ProjectController::class, 'destroys']);
     Route::post('/projects/import', [ProjectController::class, 'import'])->name('projects.import');
+    Route::post('/purchase/import', [ProjectController::class, 'imports'])->name('purchase.import');
     Route::get('/projects/export/excel', [ProjectController::class, 'exportExcel'])->name('projects.export.excel');
     Route::get('/projects/export/pdf', [ProjectController::class, 'exportPDF'])->name('projects.export.pdf');
     

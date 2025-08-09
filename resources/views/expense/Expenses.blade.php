@@ -80,13 +80,13 @@
 </style>
 
 <center>
-    <div class="form-section">
+    <!-- <div class="form-section">
         <form action="{{ route('invoices.import') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <input type="file" name="file" required>
             <button type="submit">Import Excel</button>
         </form>
-    </div>
+    </div> -->
 
     <div class="table-section">
          <table>

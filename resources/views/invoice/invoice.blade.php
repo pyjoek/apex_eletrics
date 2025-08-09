@@ -80,13 +80,13 @@ Add Item to Project
 </style>
 
 <center>
-    <div class="form-section">
+    <!-- <div class="form-section">
         <form action="{{ route('invoices.import') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <input type="file" name="file" required>
             <button type="submit">Import Excel</button>
         </form>
-    </div>
+    </div> -->
     
     <div class="invoice-form mt-5">
     <h1>Add Invoice Item</h1>
@@ -137,34 +137,6 @@ Add Item to Project
 </div>
 
     
-    <!-- <div class="table-section">
-        <table>
-            <thead>
-                <tr>
-                    <th>Project Name</th>
-                    <th>Customer Name</th>
-                    <th>Item Name</th>
-                    <th>Unit</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Amount</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($invoices as $invoice)
-                <tr>
-                    <td>{{ $invoice->project->project }}</td>
-                    <td>{{ $invoice->customer->name }}</td>
-                    <td>{{ $invoice->item }}</td>
-                    <td>{{ $invoice->unit }}</td>
-                    <td>{{ $invoice->quantity }}</td>
-                    <td>{{ $invoice->price }}</td>
-                    <td>{{ $invoice->quantity * $invoice->price }}</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div> -->
 </center>
 
 @endsection
