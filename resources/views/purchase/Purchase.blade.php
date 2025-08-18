@@ -80,15 +80,17 @@ Purchase Order
 </style>
 
 <center>
-    <div class="row">
-        @foreach ($supplier as $index => $supply)
-            <div class="col-md-4 mb-3">
+    <div class="form-section">
+        <select name="" id="">
+            @foreach ($supplier as $index => $supply)
+            <option value="">
                 <a href="{{ route('purchase', $supply->id) }}" class="btn btn-primary w-100">
                     {{ $supply->name }}
                 </a>
-            </div>
-        @endforeach
-    </div>    
+            </option>
+            @endforeach
+        </select>
+    </div>
 </center>
 
 @endsection
