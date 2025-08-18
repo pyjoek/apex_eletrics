@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('header')
-    Purchase Order
+Invoice Page
 @endsection
 
 @section('content')
 <style>
-    .form-section, .table-section {
+    .form-section {
         background-color: #fff;
         padding: 20px;
         margin-bottom: 30px;
@@ -39,13 +39,13 @@
 
 <center>
     <div class="form-section">
-        <form id="supplierForm">
-            <label for="supplier" class="fw-bold">Choose Supplier:</label>
-            <select id="supplier" name="supplier" required>
-                <option value="">-- Select Supplier --</option>
-                @foreach ($supplier as $supply)
-                    <option value="{{ route('purchase', $supply->id) }}">
-                        {{ $supply->name }}
+        <form id="projectForm">
+            <label for="project" class="fw-bold">Choose Project:</label>
+            <select id="project" name="project" required>
+                <option value="">-- Select Project --</option>
+                @foreach ($projects as $project)
+                    <option value="{{ route('work', $project->id) }}">
+                        {{ $project->project }}
                     </option>
                 @endforeach
             </select>
@@ -56,9 +56,9 @@
 </center>
 
 <script>
-    document.getElementById('supplierForm').addEventListener('submit', function(e) {
+    document.getElementById('projectForm').addEventListener('submit', function(e) {
         e.preventDefault();
-        let url = document.getElementById('supplier').value;
+        let url = document.getElementById('project').value;
         if (url) {
             window.location.href = url;
         }

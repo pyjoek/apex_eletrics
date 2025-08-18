@@ -32,7 +32,7 @@ Route::middleware('auth')->group(function () {
     
     Route::post('/project', [ProjectController::class, 'store'])->name('new.project');
     Route::get('/projects', [ProjectController::class, 'index'])->middleware(['auth', 'verified']);
-    Route::get('/projects/{id}', [ProjectController::class, 'show'])->name('work');
+    // Route::get('/projects/{id}', [ProjectController::class, 'show'])->name('work');
     Route::get('/projects/delete/{id}', [ProjectController::class, 'destroys']);
     Route::post('/projects/import', [ProjectController::class, 'import'])->name('projects.import');
     Route::post('/purchase/import', [ProjectController::class, 'imports'])->name('purchase.import');
@@ -40,6 +40,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/projects/export/pdf', [ProjectController::class, 'exportPDF'])->name('projects.export.pdf');
     
     Route::get('/invoice', [InvoiceController::class, 'index']);
+    Route::get('/invoice/view', [ProjectController::class, 'invoiceView']);
+    Route::get('/invoice/{id}', [ProjectController::class, 'show'])->name('work');
     Route::post('/invoices', [InvoiceController::class, 'store'])->name('new.invoice');
     Route::post('/invoices/import', [InvoiceController::class, 'import'])->name('invoices.import');
     Route::get('/old/{id}', [ProjectController::class, 'oldInvoice']);

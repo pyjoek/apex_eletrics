@@ -24,6 +24,12 @@ class ProjectController extends Controller
         return view('dashboard')->with(['projects' => $projects, 'supplier' => $supplier, 'customer' => $customer]);
     }
 
+    public function invoiceView()
+    {
+        $projects = Project::all();
+        return view('invoice.formInvoice')->with(['projects' => $projects]);
+    }
+
     public function show(Request $request, $id)
     {
         $projects = Project::findOrFail($id);
