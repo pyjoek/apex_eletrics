@@ -23,17 +23,29 @@ class InvoiceController extends Controller
     
     public function store(Request $request)
     {
-        $proj = Project::where('project', $request->project)->first();
-        $cust = Customer::where('name', $request->customer)->first();
+        $invoices = $request->input('invoices');
 
-        $invoice = Invoice::create([
-            'project_id' => $proj->id,
-            'customer_id' => $cust->id,
-            'item' => $request->item,
-            'unit' => $request->unit,
-            'quantity' => $request->quantity,
-            'price' => $request->price
-        ]);
+        if (is_array($invoices)) {
+            foreach ($invoices as $invoiceData) {
+                Invoice::create([
+                    'project_id'  => is_array($invoiceData['project'] ?? null) ? ($invoiceData['project'][0] ?? $request->project) : ($invoiceData['project'] ?? $request->project),
+                    'customer_id' => is_array($invoiceData['customer'] ?? null) ? ($invoiceData['customer'][0] ?? $request->customer) : ($invoiceData['customer'] ?? $request->customer),
+                    'item'        => is_array($invoiceData['item'] ?? null) ? ($invoiceData['item'][0] ?? null) : ($invoiceData['item'] ?? null),
+                    'unit'        => is_array($invoiceData['unit'] ?? null) ? ($invoiceData['unit'][0] ?? null) : ($invoiceData['unit'] ?? null),
+                    'quantity'    => is_array($invoiceData['quantity'] ?? null) ? ($invoiceData['quantity'][0] ?? null) : ($invoiceData['quantity'] ?? null),
+                    'price'       => is_array($invoiceData['price'] ?? null) ? ($invoiceData['price'][0] ?? null) : ($invoiceData['price'] ?? null),
+                ]);
+            }
+        } else {
+            Invoice::create([
+                'project_id'  => is_array($request->project) ? ($request->project[0] ?? null) : $request->project,
+                'customer_id' => is_array($request->customer) ? ($request->customer[0] ?? null) : $request->customer,
+                'item'        => is_array($request->item) ? ($request->item[0] ?? null) : $request->item,
+                'unit'        => is_array($request->unit) ? ($request->unit[0] ?? null) : $request->unit,
+                'quantity'    => is_array($request->quantity) ? ($request->quantity[0] ?? null) : $request->quantity,
+                'price'       => is_array($request->price) ? ($request->price[0] ?? null) : $request->price
+            ]);
+        }
 
         return redirect()->back();
     }

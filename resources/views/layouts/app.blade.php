@@ -121,7 +121,7 @@
                     </a>
                 </li>
 
-                {{-- Purchase Order --}}
+                <!-- {{-- Purchase Order --}}
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('show.purchase') ? 'active' : '' }}" 
                     href="{{ route('show.purchase') }}">
@@ -135,38 +135,38 @@
                     href="{{ url('/purchase') }}">
                         Order Item
                     </a>
-                </li>
+                </li> -->
 
                 {{-- Add Items (invoice create) --}}
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link {{ request()->is('invoice') && !request()->is('invoice/view') ? 'active' : '' }}" 
                     href="{{ url('/invoice') }}">
                         Add Items
                     </a>
-                </li>
+                </li> -->
 
-                {{-- Expense --}}
+                <!-- {{-- Expense --}}
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('expense') || request()->is('expense/*') ? 'active' : '' }}" 
                     href="{{ url('/expense') }}">
                         Add Expense
                     </a>
-                </li>
+                </li> -->
             </ul>
-
-            <div class="p-3">
-                <form action="{{ route('logout') }}" method="POST">
-                    @csrf
-                    <button type="submit" class="btn btn-danger w-100">Log out</button>
-                </form>
-            </div>
         </nav>
 
 
         <!-- Main Content -->
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
-            <div class="page-header">
+            <div class="page-header d-flex justify-content-between align-items-center">
                 <h2>@yield('header')</h2>
+                
+                <div class="p-3">
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button class="btn btn-primary ms-auto">Log out</button>
+                    </form>
+                </div>
             </div>
             @yield('content')
         </main>

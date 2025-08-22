@@ -32,11 +32,36 @@ class ProjectController extends Controller
 
     public function show(Request $request, $id)
     {
+
         $projects = Project::findOrFail($id);
+        $customer = Customer::all();
+        $allprojects = Project::all();
         $hist = HistInvoice::where('project_id', $id)->get();
         $invoices = Invoice::where('project_id', $projects->id)->get();
+        // dd($hist->first()->id);
 
         return view('work')->with([
+            'allprojects' => $allprojects,
+            'allcustomers' => $customer,
+            'projects' => $projects,
+            'invoices' => $invoices,
+            'id' => $id,
+            'hist' => $hist
+        ]);
+    }
+
+     public function invoiceHistory(Request $request, $id)
+    {
+        $projects = Project::findOrFail($id);
+        $customer = Customer::all();
+        $allprojects = Project::all();
+        $hist = HistInvoice::where('project_id', $id)->get();
+        $invoices = Invoice::where('project_id', $projects->id)->get();
+        // dd($hist);
+
+        return view('work')->with([
+            'allprojects' => $allprojects,
+            'allcustomers' => $customer,
             'projects' => $projects,
             'invoices' => $invoices,
             'id' => $id,

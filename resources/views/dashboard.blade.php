@@ -150,7 +150,7 @@ Projects
                         @foreach($projects as $project)
                         <tr>
                             <td>{{ $project->project }}</td>
-                            <td><a href="/projects/{{ $project->id }}"><center><button class="btn btn-secondary">Invoice</button></center></a></td>
+                            <td><a href="/invoice/{{ $project->id }}"><center><button class="btn btn-secondary">Invoice</button></center></a></td>
                             <td><a href="/expense/{{ $project->id }}"><center><button class="btn btn-secondary">Expense</button></center></a></td>
                             <td><a href="/projects/delete/{{ $project->id }}"><center><button class="btn btn-danger">Delete</button></center></a></td>
                         </tr>

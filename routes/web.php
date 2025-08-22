@@ -42,6 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/invoice', [InvoiceController::class, 'index']);
     Route::get('/invoice/view', [ProjectController::class, 'invoiceView']);
     Route::get('/invoice/{id}', [ProjectController::class, 'show'])->name('work');
+    Route::get('/invoice/history/{id}', [ProjectController::class, 'invoiceHistory'])->name('invoice.history');
     Route::post('/invoices', [InvoiceController::class, 'store'])->name('new.invoice');
     Route::post('/invoices/import', [InvoiceController::class, 'import'])->name('invoices.import');
     Route::get('/old/{id}', [ProjectController::class, 'oldInvoice']);
