@@ -30,7 +30,7 @@ class ProjectController extends Controller
         return view('invoice.formInvoice')->with(['projects' => $projects]);
     }
 
-    public function show(Request $request, $id)
+    public function show($id)
     {
 
         $projects = Project::findOrFail($id);
@@ -38,7 +38,7 @@ class ProjectController extends Controller
         $allprojects = Project::all();
         $hist = HistInvoice::where('project_id', $id)->get();
         $invoices = Invoice::where('project_id', $projects->id)->get();
-        // dd($hist->first()->id);
+        // dd($hist);
 
         return view('work')->with([
             'allprojects' => $allprojects,

@@ -104,11 +104,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <!-- <div style="margin-right: 15px;">
-                        <a href="{{ route('invoice.history', $hist->first()->id) }}">
-                            <button type="button" class="btn btn-info">Invoice History</button>
-                        </a>
-                    </div> -->
+                   
                     <div class="export-links" style="position: relative;">
                         <div style="display: flex; justify-content: flex-end; position: relative;">
                             <button type="button" id="export-main-btn" class="export-btn">
@@ -156,7 +152,7 @@
                         <tr>
                             <th>Item Name</th>
                             <th>Quantity&nbsp;/&nbsp;Unit</th>
-                            <th>Price</th>
+                            <th> Unit Price</th>
                             <th>Amount</th>
                         </tr>
                     </thead>
